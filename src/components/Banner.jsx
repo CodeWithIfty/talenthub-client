@@ -1,9 +1,11 @@
+import { BiSearch } from "react-icons/bi";
 const Banner = () => {
   return (
     <>
       <section className=" bg-[url(/assets/images/headerimage1.jpg)] bg-cover bg-center  bg-no-repeat h-[85vh]">
-        <div className="w-full bg-gray-800 bg-opacity-50">
-          <div className=" w-full bggr  mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+        <div className="w-full h-full bg-gray-800 bg-opacity-50">
+          <div className="  w-full h-full mx-auto max-w-screen-xl px-4 py-32 sm:px-6 flex flex-col lg:flex-row gap-10  items-center lg:px-8 justify-around ">
+
             <div className="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
               <h1 className="text-3xl font-extrabold sm:text-5xl text-white">
                 Let us find your
@@ -28,6 +30,21 @@ const Banner = () => {
                 >
                   Learn More
                 </a>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <div className="w-96  ">
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="Search  job..."
+                  className="w-full p-4 rounded-xl bg-white"
+                />
+              </div>
+              <div className="p-4 border-2 rounded-lg text-white bg-success border-success outline-none">
+                <BiSearch />
               </div>
             </div>
           </div>

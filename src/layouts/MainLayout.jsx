@@ -20,7 +20,7 @@ const MainLayout = ({ children }) => {
   }, []);
 
   const navbarClass = isNavSticky
-    ? "navbar sticky  top-0 bg-white  transition duration-1000 ease-in-out "
+    ? "navbar sticky  top-0 bg-white  transition duration-200 ease-in-out "
     : "navbar  absolute transition p-6";
 
   return (
@@ -60,13 +60,17 @@ const MainLayout = ({ children }) => {
                 />
               </div>
               <div className="flex-none hidden lg:block">
-                <ul className="menu menu-horizontal">
+                <ul
+                  className={`${
+                    isNavSticky ? "text-black" : "text-white"
+                  }  menu menu-horizontal  font-semibold`}
+                >
                   {/* Navbar menu content here */}
                   <li>
-                    <a>Navbar Item 1</a>
+                    <a>Home</a>
                   </li>
                   <li>
-                    <a>Navbar Item 2</a>
+                    <a>My Jobs</a>
                   </li>
                 </ul>
               </div>
