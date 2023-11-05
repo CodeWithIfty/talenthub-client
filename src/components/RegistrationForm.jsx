@@ -90,10 +90,10 @@ const RegistrationForm = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {emailError && (
-              <p className="text-xs text-error mt-2">{emailError}</p>
-            )}
           </div>
+          {emailError && (
+            <p className="text-xs text-error mt-2 text-center">{emailError}</p>
+          )}
 
           <div className="flex  items-center justify-between">
             <label htmlFor="password" className="text-white  ">
@@ -108,11 +108,10 @@ const RegistrationForm = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {passwordError && (
-              <p className="text-xs text-error mt-2">{passwordError}</p>
-            )}
           </div>
-
+          {passwordError && (
+            <p className="text-xs text-error mt-2 ">{passwordError}</p>
+          )}
           <div className="flex  items-center justify-between">
             <label htmlFor="photourl" className="text-white  ">
               Photo URL:{" "}

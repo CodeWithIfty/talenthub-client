@@ -50,6 +50,42 @@ const JobSection = () => {
                 </button>
               </div>
             </TabPanel>
+            <TabPanel className={" space-y-3"}>
+              <JobCard />
+              <JobCard />
+              <JobCard />
+              <JobCard />
+
+              <div className="flex justify-center ">
+                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
+                  See More
+                </button>
+              </div>
+            </TabPanel>
+            <TabPanel className={" space-y-3"}>
+              <JobCard />
+              <JobCard />
+              <JobCard />
+              <JobCard />
+
+              <div className="flex justify-center ">
+                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
+                  See More
+                </button>
+              </div>
+            </TabPanel>
+            <TabPanel className={" space-y-3"}>
+              <JobCard />
+              <JobCard />
+              <JobCard />
+              <JobCard />
+
+              <div className="flex justify-center ">
+                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
+                  See More
+                </button>
+              </div>
+            </TabPanel>
           </div>
         </Tabs>
       </div>

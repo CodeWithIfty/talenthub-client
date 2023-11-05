@@ -41,7 +41,7 @@ const LoginForm = () => {
     <div className="flex w-full justify-around">
       <form onSubmit={handleLoginSubmit}>
         <h1 className="text-white px-10 mt-10 text-xl">
-          Register here with your required information
+          Login here with your required information
         </h1>
         <div className="flex flex-col gap-2 p-10 ">
           <div className="flex  items-center justify-between">

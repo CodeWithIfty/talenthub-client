@@ -6,7 +6,7 @@ import { authContext } from "../utils/context/AuthProvider";
 
 const MainLayout = () => {
   const [isNavSticky, setIsNavSticky] = useState(false);
-  const { user, SignOutUser } = useContext(authContext);
+  const { user, SignOutUser, loading } = useContext(authContext);
   console.log(user);
 
   useEffect(() => {
@@ -88,7 +88,9 @@ const MainLayout = () => {
                 </ul>
               </div>
               <div className="">
-                {user ? (
+                {loading ? (
+                  <span className="loading loading-ring loading-md scale-150 mr-5"></span>
+                ) : user ? (
                   <div className="dropdown dropdown-end">
                     <label
                       tabIndex={0}
@@ -110,8 +112,7 @@ const MainLayout = () => {
                     >
                       <li>
                         <a className="justify-between">
-                          Profile
-                          <span className="badge">New</span>
+                          Profile/{user.displayName}
                         </a>
                       </li>
                       <li>
