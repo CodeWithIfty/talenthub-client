@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const RegistrationForm = () => {
   const { createUser, SignInWithGoogle, updateUserProfile } =
@@ -19,7 +20,7 @@ const RegistrationForm = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
+    const toastId = toast.loading("Logging in ...");
     if (password.length < 6) {
       setPasswordError("The password is less than 6 character");
       return;
@@ -37,13 +38,14 @@ const RegistrationForm = () => {
     createUser(email, password)
       .then((res) => {
         updateUserProfile(name, photoUrl);
-        alert("logged in");
+        toast.success("Successfully Registered !", { id: toastId });
         // navigate("/");
         console.log(res);
       })
       .catch((error) => {
         if (error.message.match(/email-already-in-use/g))
           setEmailError("This email already in use");
+        toast.error("This email already in use", { id: toastId });
         console.log(error.message);
       });
   };
@@ -136,6 +138,7 @@ const RegistrationForm = () => {
               className="w-44 p-4 bg-gray-700 rounded-full text-white "
             />
             <button
+              type="button"
               className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white"
               onClick={handleSignInWithGoogle}
             >

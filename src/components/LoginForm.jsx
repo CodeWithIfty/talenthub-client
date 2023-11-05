@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Tab } from "react-tabs";
 import { authContext } from "../utils/context/AuthProvider";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const { SignInUser, loading, setLoading, SignInWithGoogle } =
@@ -13,6 +14,7 @@ const LoginForm = () => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Logging in ...");
 
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
@@ -22,20 +24,27 @@ const LoginForm = () => {
     SignInUser(email, password)
       .then((res) => {
         console.log(res);
+        toast.success("Logged in", { id: toastId });
         navigate(location?.state ? location.state : "/");
       })
       .catch(() => {
         setLoading(false);
+        toast.error("Invalid Login Details", { id: toastId });
         setLoginError("Invalid login details!");
       });
   };
 
   const handleSignInWithGoogle = () => {
+    const toastId = toast.loading("Logging in ...");
     SignInWithGoogle()
       .then(() => {
+        toast.success("Logged in", { id: toastId });
         navigate(location?.state ? location.state : "/");
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        toast.error("Invalid Login Details", { id: toastId });
+        console.log(error);
+      });
   };
   return (
     <div className="flex w-full justify-around">
@@ -79,6 +88,7 @@ const LoginForm = () => {
               className="w-44 p-4 bg-gray-700 rounded-full text-white "
             />
             <button
+              type="button"
               className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white"
               onClick={handleSignInWithGoogle}
             >

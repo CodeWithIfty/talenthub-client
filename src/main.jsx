@@ -14,6 +14,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import BidRequest from "./pages/BidRequest.jsx";
 import AuthProvider from "./utils/context/AuthProvider.jsx";
 import PrivateRoute from "./utils/PrivateRoute.jsx";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -83,5 +84,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
+    <Toaster />
   </React.StrictMode>
 );
