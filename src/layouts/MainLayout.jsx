@@ -23,8 +23,8 @@ const MainLayout = () => {
   }, []);
 
   const navbarClass = isNavSticky
-    ? "navbar sticky  top-0 bg-white  transition duration-200 ease-in-out z-50"
-    : "navbar  absolute transition p-6";
+    ? "navbar sticky  top-0 bg-white  transition duration-1000 ease-in-out z-50 shadow"
+    : "navbar  absolute transition p-6 ";
 
   return (
     <div>

@@ -8,11 +8,16 @@ import AddJob from "./pages/AddJob.jsx";
 import LogInRegistration from "./pages/LogInRegistration.jsx";
 import JobDetails from "./pages/JobDetails.jsx";
 import BrowseJobs from "./pages/BrowseJobs.jsx";
+import MyPostedJobs from "./pages/MyPostedJobs.jsx";
+import MyBids from "./pages/MyBids.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import BidRequest from "./pages/BidRequest.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -33,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/add-jobs",
         element: <AddJob />,
+      },
+      {
+        path: "/my-posted-jobs",
+        element: <MyPostedJobs />,
+      },
+      {
+        path: "/my-bids",
+        element: <MyBids />,
+      },
+      {
+        path: "/bid-request",
+        element: <BidRequest />,
       },
     ],
   },

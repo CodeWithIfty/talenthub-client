@@ -1,6 +1,7 @@
 import { BiTime } from "react-icons/bi";
 import { FaChild } from "react-icons/fa";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 
 const RegistrationForm = () => {
   return (
@@ -66,7 +67,10 @@ const RegistrationForm = () => {
               value={"Register"}
               className="w-44 p-4 bg-gray-700 rounded-full text-white "
             />
-            <p className="text-lg font-semibold">Forgot Password?</p>
+            <button className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white">
+              <FcGoogle className="text-3xl" />
+              <span>Register With Google</span>
+            </button>
           </div>
         </div>
       </form>

@@ -3,7 +3,7 @@ import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import JobCard from "../components/JobCard";
 
-const MyPostedJobs = () => {
+const MyBids = () => {
   return (
     <div className="container mx-auto mt-28 ">
       <div className="">
@@ -11,7 +11,7 @@ const MyPostedJobs = () => {
           <div className="flex items-center justify-center flex-col lg:flex-row">
             <div className=" flex items-center">
               <h1 className="text-3xl font-bold px-10 py-2 border-r-2 ">
-                My Posted Jobs
+                My Bids
               </h1>
               <h2 className="text-sm  py-2 pl-10 pr-24">
                 Popular <br />
@@ -58,4 +58,4 @@ const MyPostedJobs = () => {
   );
 };
 
-export default MyPostedJobs;
+export default MyBids;
