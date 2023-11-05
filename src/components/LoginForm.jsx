@@ -1,9 +1,45 @@
+import { useContext, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Tab } from "react-tabs";
+import { authContext } from "../utils/context/AuthProvider";
 
 const LoginForm = () => {
+  const { SignInUser, loading, setLoading, SignInWithGoogle } =
+    useContext(authContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+
+    const form = new FormData(e.currentTarget);
+    const email = form.get("email");
+    const password = form.get("password");
+    console.log(email, password);
+
+    SignInUser(email, password)
+      .then((res) => {
+        console.log(res);
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch(() => {
+        setLoading(false);
+        setLoginError("Invalid login details!");
+      });
+  };
+
+  const handleSignInWithGoogle = () => {
+    SignInWithGoogle()
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="flex w-full justify-around">
-      <form>
+      <form onSubmit={handleLoginSubmit}>
         <h1 className="text-white px-10 mt-10 text-xl">
           Register here with your required information
         </h1>
@@ -31,15 +67,9 @@ const LoginForm = () => {
               className="w-96 p-2 bg-white rounded-lg "
             />
           </div>
-          <div className="ml-10 mt-4 text-white flex items-center">
-            <input
-              type="checkbox"
-              name="checkbox"
-              id="checkbox"
-              className="mr-3 "
-            />
-            <label htmlFor="checkbox">Remember me</label>
-          </div>
+          {loginError && (
+            <p className="text-xs text-error mt-2">{loginError}</p>
+          )}
           <div className="ml-32 mt-4 flex items-center gap-10">
             <input
               type="submit"
@@ -48,7 +78,13 @@ const LoginForm = () => {
               value={"SIGN IN"}
               className="w-44 p-4 bg-gray-700 rounded-full text-white "
             />
-            <p className="text-lg font-semibold">Forgot Password?</p>
+            <button
+              className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white"
+              onClick={handleSignInWithGoogle}
+            >
+              <FcGoogle className="text-3xl" />
+              <span>SIGN IN WITH GOOGLE</span>
+            </button>
           </div>
         </div>
       </form>

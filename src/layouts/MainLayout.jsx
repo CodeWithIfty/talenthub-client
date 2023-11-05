@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import { BiSolidUser } from "react-icons/bi";
+import { authContext } from "../utils/context/AuthProvider";
 
 const MainLayout = () => {
   const [isNavSticky, setIsNavSticky] = useState(false);
+  const { user, SignOutUser } = useContext(authContext);
+  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,12 +88,48 @@ const MainLayout = () => {
                 </ul>
               </div>
               <div className="">
-                <NavLink
-                  to={"/login"}
-                  className="w-10  h-10 bg-[#12CD6A] hover:bg-black transition ease-in-out duration-150 text-white flex justify-center items-center rounded-full text-xl"
-                >
-                  <BiSolidUser />
-                </NavLink>
+                {user ? (
+                  <div className="dropdown dropdown-end">
+                    <label
+                      tabIndex={0}
+                      className="btn btn-ghost btn-circle avatar"
+                    >
+                      <div className="w-10 rounded-full">
+                        <img
+                          src={`${
+                            user.photoURL
+                              ? user.photoURL
+                              : "https://i.ibb.co/rHzPb0S/icon-256x256.png"
+                          }`}
+                        />
+                      </div>
+                    </label>
+                    <ul
+                      tabIndex={0}
+                      className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                    >
+                      <li>
+                        <a className="justify-between">
+                          Profile
+                          <span className="badge">New</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a>Settings</a>
+                      </li>
+                      <li>
+                        <button onClick={SignOutUser}>Logout</button>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <NavLink
+                    to={"/login"}
+                    className="w-10  h-10 bg-[#12CD6A] hover:bg-black transition ease-in-out duration-150 text-white flex justify-center items-center rounded-full text-xl"
+                  >
+                    <BiSolidUser />
+                  </NavLink>
+                )}
               </div>
             </div>
           </div>

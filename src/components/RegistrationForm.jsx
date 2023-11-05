@@ -2,11 +2,62 @@ import { BiTime } from "react-icons/bi";
 import { FaChild } from "react-icons/fa";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+import { useContext, useState } from "react";
+import { authContext } from "../utils/context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
+  const { createUser, SignInWithGoogle, updateUserProfile } =
+    useContext(authContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const navigate = useNavigate();
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (password.length < 6) {
+      setPasswordError("The password is less than 6 character");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setPasswordError("The password don't have a capital letter");
+      return;
+    } else if (!/[!@#$%^&*]/.test(password)) {
+      setPasswordError("The password don't have a capital letter");
+      return;
+    } else {
+      setPasswordError("");
+    }
+
+    console.log(name, email, password);
+    createUser(email, password)
+      .then((res) => {
+        updateUserProfile(name, photoUrl);
+        alert("logged in");
+        // navigate("/");
+        console.log(res);
+      })
+      .catch((error) => {
+        if (error.message.match(/email-already-in-use/g))
+          setEmailError("This email already in use");
+        console.log(error.message);
+      });
+  };
+  const handleSignInWithGoogle = () => {
+    SignInWithGoogle()
+      .then((res) => {
+        navigate(location?.state ? location.state : "/");
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="flex w-full justify-around">
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <h1 className="text-white px-10 mt-10 text-xl">
           Register here with your required information
         </h1>
@@ -20,6 +71,9 @@ const RegistrationForm = () => {
               name="name"
               id="name"
               className="w-96 p-2 bg-white rounded-lg "
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
 
@@ -32,7 +86,13 @@ const RegistrationForm = () => {
               name="email"
               id="email"
               className="w-96 p-2 bg-white rounded-lg "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
+            {emailError && (
+              <p className="text-xs text-error mt-2">{emailError}</p>
+            )}
           </div>
 
           <div className="flex  items-center justify-between">
@@ -44,7 +104,13 @@ const RegistrationForm = () => {
               name="password"
               id="password"
               className="w-96 p-2 bg-white rounded-lg "
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
+            {passwordError && (
+              <p className="text-xs text-error mt-2">{passwordError}</p>
+            )}
           </div>
 
           <div className="flex  items-center justify-between">
@@ -56,6 +122,9 @@ const RegistrationForm = () => {
               name="photourl"
               id="photourl"
               className="w-96 p-2 bg-white rounded-lg "
+              value={photoUrl}
+              onChange={(e) => setPhotoUrl(e.target.value)}
+              required
             />
           </div>
 
@@ -67,7 +136,10 @@ const RegistrationForm = () => {
               value={"Register"}
               className="w-44 p-4 bg-gray-700 rounded-full text-white "
             />
-            <button className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white">
+            <button
+              className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white"
+              onClick={handleSignInWithGoogle}
+            >
               <FcGoogle className="text-3xl" />
               <span>Register With Google</span>
             </button>

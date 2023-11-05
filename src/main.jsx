@@ -12,6 +12,8 @@ import MyPostedJobs from "./pages/MyPostedJobs.jsx";
 import MyBids from "./pages/MyBids.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import BidRequest from "./pages/BidRequest.jsx";
+import AuthProvider from "./utils/context/AuthProvider.jsx";
+import PrivateRoute from "./utils/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,23 +35,44 @@ const router = createBrowserRouter([
       },
       {
         path: "/job-details",
-        element: <JobDetails />,
+        element: (
+          <PrivateRoute>
+            <JobDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-jobs",
-        element: <AddJob />,
+        element: (
+          <PrivateRoute>
+            <AddJob />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-posted-jobs",
-        element: <MyPostedJobs />,
+        element: (
+          <PrivateRoute>
+            <MyPostedJobs />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-bids",
-        element: <MyBids />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <MyBids />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/bid-request",
-        element: <BidRequest />,
+        element: (
+          <PrivateRoute>
+            <BidRequest />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -57,6 +80,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
