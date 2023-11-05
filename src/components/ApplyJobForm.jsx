@@ -5,48 +5,72 @@ const ApplyJobForm = () => {
         ✕
       </button>
 
+      <div className="p-4 ">
+        <h1 className="text-3xl font-semibold text-center">
+          Place Your Bid Here
+        </h1>
+        <p className="text-sm text-center mt-2 text-[#12CD6A]">
+          Web Designer at Google inc
+        </p>
+      </div>
       <div className="flex flex-col gap-2 p-10 ">
-        <div className="flex  items-center justify-between">
-          <label htmlFor="email" className="text-white  ">
-            Email:{" "}
+        <div className="mb-3">
+          <label htmlFor="price" className="text-gray-600  text-lg">
+            Price:
           </label>
           <input
-            type="email"
-            name="email"
-            id="email"
-            className="w-96 p-2 bg-white rounded-lg "
+            type="number"
+            name="price"
+            id="price"
+            className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
           />
         </div>
 
-        <div className="flex  items-center justify-between">
-          <label htmlFor="password" className="text-white  ">
-            Password:{" "}
+        <div className="">
+          <label htmlFor="deadline" className="text-gray-600  text-lg">
+            Deadline:
           </label>
           <input
-            type="password"
-            name="password"
-            id="password"
-            className="w-96 p-2 bg-white rounded-lg "
+            type="date"
+            name="deadline"
+            id="deadline"
+            className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
           />
         </div>
-        <div className="ml-10 mt-4 text-white flex items-center">
+
+        <div className="">
+          <label htmlFor="userEmail" className="text-gray-600  text-lg">
+            Your Email:
+          </label>
           <input
-            type="checkbox"
-            name="checkbox"
-            id="checkbox"
-            className="mr-3 "
+            type="email"
+            name="userEmail"
+            id="userEmail"
+            className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+            readOnly
           />
-          <label htmlFor="checkbox">Remember me</label>
         </div>
-        <div className="ml-32 mt-4 flex items-center gap-10">
+
+        <div className="">
+          <label htmlFor="clientEmail" className="text-gray-600  text-lg">
+            Client Email:
+          </label>
+          <input
+            type="email"
+            name="clientEmail"
+            id="clientEmail"
+            className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+            readOnly
+          />
+        </div>
+        <div className=" mt-4 flex items-center gap-10">
           <input
             type="submit"
             name=""
             id=""
-            value={"SIGN IN"}
-            className="w-44 p-4 bg-gray-700 rounded-full text-white "
+            value={"SUBMIT"}
+            className="w-44 px-4 py-3 mx-auto border-2 border-[#12CD6A]  hover:border-gray-800 cursor-pointer rounded-full text-gray-700 hover:bg-gray-700 hover:text-white font-semibold transition duration-200 ease-in-out "
           />
-          <p className="text-lg font-semibold">Forgot Password?</p>
         </div>
       </div>
     </form>

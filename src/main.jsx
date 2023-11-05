@@ -7,6 +7,7 @@ import MainLayout from "./layouts/MainLayout.jsx";
 import AddJob from "./pages/AddJob.jsx";
 import LogInRegistration from "./pages/LogInRegistration.jsx";
 import JobDetails from "./pages/JobDetails.jsx";
+import BrowseJobs from "./pages/BrowseJobs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,8 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/add-jobs",
-        element: <AddJob />,
+        path: "/browse-jobs",
+        element: <BrowseJobs />,
       },
       {
         path: "/login",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/job-details",
         element: <JobDetails />,
+      },
+      {
+        path: "/add-jobs",
+        element: <AddJob />,
       },
     ],
   },

@@ -5,7 +5,7 @@ const JobDetails = () => {
     <div>
       <div className="mt-24 bg-[#12CD6A] p-10">
         <div className="container mx-auto">
-          <h1 className="text-4xl text-white">Web Developer</h1>
+          <h1 className="text-4xl text-white">Job Details </h1>
         </div>
       </div>
 
@@ -29,7 +29,7 @@ const JobDetails = () => {
         </div>
       </div>
 
-      <div className="container mx-auto flex h-screen">
+      <div className="container mx-auto flex ">
         <div className="w-10/12  p-10">
           <div className="">
             <h1 className="text-5xl font-semibold mb-3">Google INC</h1>
@@ -61,7 +61,7 @@ const JobDetails = () => {
               onClick={() => document.getElementById("my_modal_3").showModal()}
               className="py-2 px-4 border-2 border-success rounded-full hover:bg-[#12CD6A] hover:shadow-xl font-semibold hover:text-white transition duration-200 ease-in-out"
             >
-              APPLY FOR JOB
+              PLACE YOUR BID
             </button>
           </div>
         </div>
