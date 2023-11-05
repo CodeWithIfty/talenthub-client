@@ -7,7 +7,7 @@ const BidRequest = () => {
   return (
     <div className="container mx-auto mt-28 ">
       <div className="">
-        <Tabs>
+        <Tabs defaultIndex={3}>
           <div className="flex items-center justify-center flex-col lg:flex-row">
             <div className=" flex items-center">
               <h1 className="text-3xl font-bold px-10 py-2 border-r-2 ">

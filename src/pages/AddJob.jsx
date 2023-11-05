@@ -7,15 +7,15 @@ const AddJob = () => {
           className="flex flex-col justify-center items-center"
         >
           <div className="p-4 ">
-            <h1 className="text-3xl font-semibold text-center">
-              Place Your Bid Here
+            <h1 className="text-3xl font-semibold text-center uppercase">
+              post a job from here
             </h1>
             <p className="text-sm text-center mt-2 text-[#12CD6A]">
-              Web Designer at Google inc
+              Fill Up The Form Property
             </p>
           </div>
 
-          <div className="flex flex-col  gap-2 p-10 ">
+          <div className="flex flex-col  gap-2  ">
             <div className="mb-3 flex flex-col">
               <label htmlFor="userEmail" className="text-gray-600  text-lg">
                 Email:

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { FaBriefcase, FaLocationArrow, FaSearch } from "react-icons/fa";
 import SearchBox from "./SearchBox";
 const Banner = () => {
   const [bgPosition, setBgPosition] = useState(0);
