@@ -1,8 +1,35 @@
+import { useEffect, useRef, useState } from "react";
 import { FaBriefcase, FaLocationArrow, FaSearch } from "react-icons/fa";
 const Banner = () => {
+  const [bgPosition, setBgPosition] = useState(0);
+  const bannerRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (bannerRef.current) {
+        const scrollPosition = window.scrollY;
+        const bannerPosition = bannerRef.current.offsetTop;
+        setBgPosition((bannerPosition - scrollPosition) * 0.2); 
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <section className=" bg-[url(/assets/images/headerimage1.jpg)] bg-cover bg-center  bg-no-repeat h-[85vh]">
+      <section
+        ref={bannerRef}
+        className="bg-cover bg-center  bg-no-repeat h-[85vh]"
+        style={{
+          backgroundImage: `url(/assets/images/headerimage1.jpg)`,
+          backgroundPositionY: `${bgPosition}px`,
+        }}
+      >
         <div className="w-full h-full   flex items-center flex-col justify-between gap-3">
           <div className="w-full text-center mt-36">
             <h1 className="text-6xl font-bold">Looking For a Job?</h1>
@@ -38,7 +65,7 @@ const Banner = () => {
                     type="text"
                     name=""
                     id=" "
-                    className="p-4 xl::w-[500px] lg:w-[300px] w-[400px]  flex rounded-lg px-6 bg-white outline-none mt-2 text-black placeholder-gray-600 font-semibold"
+                    className="p-4 xl:w-[500px] lg:w-[300px] w-[400px]  flex rounded-lg px-6 bg-white outline-none mt-2 text-black placeholder-gray-600 font-semibold"
                     placeholder="keyword, job title or skill"
                   />
                   <FaBriefcase className="text-2xl text-[#12CD6A] -ml-10 mt-2" />
@@ -53,17 +80,17 @@ const Banner = () => {
                     name=""
                     id=" "
                     className="p-4 xl:w-[300px] w-[250px]  flex rounded-lg px-6 bg-white outline-none mt-2 text-black placeholder-gray-600 font-semibold"
-                    placeholder="keyword, job title or skill"
+                    placeholder="Location"
                   />
                   <FaLocationArrow className="text-xl text-[#12CD6A] -ml-10 mt-2" />
                 </div>
-                <span className="text-white ml-4 lg:mt-3">e.g. Designer</span>
+                <span className="text-white ml-4 lg:mt-3">e.g. New York</span>
               </div>
 
-              <div className="flex flex-col items-start mt-2">
+              <div className="flex flex-col items-start mt-2 ">
                 <button
                   type="submit"
-                  className="p-2 w-14 h-14 flex items-center justify-center rounded-lg border-2 bg-[#12CD6A] hover:bg-[#0EAD58] text-white transition duration-300 ease-in-out transform hover:scale-105"
+                  className=" p-2 w-14 h-14 flex items-center justify-center rounded-lg border-2 bg-[#12CD6A] hover:bg-[#0EAD58] text-white transition duration-300 ease-in-out transform hover:scale-105"
                 >
                   <FaSearch className="text-xl" />
                 </button>
