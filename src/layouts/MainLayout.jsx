@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import Footer from "../components/Footer";
+import { BiSolidUser } from "react-icons/bi";
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   const [isNavSticky, setIsNavSticky] = useState(false);
 
   useEffect(() => {
@@ -83,12 +85,17 @@ const MainLayout = ({ children }) => {
                 </ul>
               </div>
               <div className="">
-                <button className="btn btn-success text-white">Login</button>
+                <NavLink
+                  to={"/login"}
+                  className="w-10  h-10 bg-[#12CD6A] hover:bg-black transition ease-in-out duration-150 text-white flex justify-center items-center rounded-full text-xl"
+                >
+                  <BiSolidUser />
+                </NavLink>
               </div>
             </div>
           </div>
           {/* Page content here */}
-          {children}
+          <Outlet></Outlet>
         </div>
 
         <div className="drawer-side h-full">
@@ -116,6 +123,9 @@ const MainLayout = ({ children }) => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="">
+        <Footer />
       </div>
     </div>
   );
