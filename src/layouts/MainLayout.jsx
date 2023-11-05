@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const MainLayout = ({ children }) => {
   const [isNavSticky, setIsNavSticky] = useState(false);
@@ -61,16 +62,23 @@ const MainLayout = ({ children }) => {
               </div>
               <div className="flex-none hidden lg:block">
                 <ul
-                  className={`${
-                    isNavSticky ? "text-black" : "text-white"
-                  }  menu menu-horizontal  font-semibold`}
+                  className={`text-gray-700  menu menu-horizontal  font-bold`}
                 >
                   {/* Navbar menu content here */}
                   <li>
-                    <a>Home</a>
+                    <NavLink to={"/"}>HOME</NavLink>
                   </li>
                   <li>
-                    <a>My Jobs</a>
+                    <NavLink to={"/add-jobs"}>ADD JOB</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={"/my-posted-jobs"}>MY POSTED JOBS</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={"/my-bids"}>MY BIDS</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={"/bid-request"}>BID REQUEST</NavLink>
                   </li>
                 </ul>
               </div>
@@ -83,19 +91,28 @@ const MainLayout = ({ children }) => {
           {children}
         </div>
 
-        <div className="drawer-side">
+        <div className="drawer-side h-full">
           <label
             htmlFor="my-drawer-3"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200">
+          <ul className="menu p-4 w-80 h-full  bg-base-200">
             {/* Sidebar content here */}
             <li>
-              <a>Sidebar Item 1</a>
+              <NavLink to={"/"}>HOME</NavLink>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <NavLink to={"/add-jobs"}>ADD JOB</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/my-posted-jobs"}>MY POSTED JOBS</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/my-bids"}>MY BIDS</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/bid-request"}>BID REQUEST</NavLink>
             </li>
           </ul>
         </div>
