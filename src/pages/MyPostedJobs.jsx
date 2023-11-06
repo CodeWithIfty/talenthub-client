@@ -10,7 +10,7 @@ import { authContext } from "../utils/context/AuthProvider";
 import Swal from "sweetalert2";
 
 const MyPostedJobs = () => {
-  const { user } = useContext(authContext);
+  const { user, SignOutUser } = useContext(authContext);
   const [category, setCategory] = useState("") || {};
   const axios = useAxios();
 
@@ -23,6 +23,9 @@ const MyPostedJobs = () => {
         );
         return res.data;
       } catch (error) {
+        if (error?.response?.status === 401) {
+          SignOutUser();
+        }
         console.log(error);
       }
     },

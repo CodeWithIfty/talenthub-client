@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 const MyBids = () => {
   const axios = useAxios();
   const [category, setCategory] = useState("") || {};
-  const { user } = useContext(authContext);
+  const { user, SignOutUser } = useContext(authContext);
 
   const { data: myBids, refetch } = useQuery({
     queryKey: ["myBids", user],
@@ -19,6 +19,9 @@ const MyBids = () => {
         const res = await axios.get(`/bids?userEmail=${user.email}`);
         return res.data;
       } catch (error) {
+        if (error?.response?.status === 401) {
+          SignOutUser();
+        }
         console.log(error);
       }
     },
@@ -38,6 +41,7 @@ const MyBids = () => {
       });
     } catch (err) {
       toast.error("Something went wrong!", { id: toastId });
+
       console.log(err);
     }
   };
