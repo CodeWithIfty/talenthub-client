@@ -4,8 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Tab } from "react-tabs";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
+import useAxios from "../utils/hooks/useAxios";
 
 const LoginForm = () => {
+  const axios = useAxios();
   const { SignInUser, loading, setLoading, SignInWithGoogle } =
     useContext(authContext);
   const location = useLocation();
@@ -23,11 +25,16 @@ const LoginForm = () => {
 
     SignInUser(email, password)
       .then((res) => {
-        // console.log(res);
-        toast.success("Logged in", { id: toastId });
-        navigate(location?.state ? location.state : "/");
+        const userEmail = res.user.email;
+        if (userEmail) {
+          axios.post("/auth/access-token", { userEmail }).then((res) => {
+            toast.success("Logged in", { id: toastId });
+            navigate(location?.state ? location.state : "/");
+            console.log(res);
+          });
+        }
       })
-      .catch(() => {
+      .catch((err) => {
         setLoading(false);
         toast.error("Invalid Login Details", { id: toastId });
         setLoginError("Invalid login details!");
@@ -37,9 +44,15 @@ const LoginForm = () => {
   const handleSignInWithGoogle = () => {
     const toastId = toast.loading("Logging in ...");
     SignInWithGoogle()
-      .then(() => {
-        toast.success("Logged in", { id: toastId });
-        navigate(location?.state ? location.state : "/");
+      .then((res) => {
+        const userEmail = res.user.email;
+        if (userEmail) {
+          axios.post("/auth/access-token", { userEmail }).then((res) => {
+            toast.success("Logged in", { id: toastId });
+            navigate(location?.state ? location.state : "/");
+            console.log(res);
+          });
+        }
       })
       .catch((error) => {
         toast.error("Invalid Login Details", { id: toastId });
