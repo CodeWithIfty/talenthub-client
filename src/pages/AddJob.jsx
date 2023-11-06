@@ -21,7 +21,6 @@ const AddJob = () => {
   // console.log(user.email);
   const handleAddJob = (e) => {
     e.preventDefault();
-
     const selectedDate = new Date(formData.deadline);
     const currentDate = new Date();
     if (selectedDate < currentDate) {
@@ -31,9 +30,17 @@ const AddJob = () => {
 
     const toastId = toast.loading("Logging in ...");
     try {
-      axios.post("/job", formData).then((res) => {
+      axios.post("/job", formData).then(() => {
         toast.success("Job Posted", { id: toastId });
-        // console.log(res.data);
+        setFormData({
+          clientInfo: userInfo,
+          jobTitle: "",
+          deadline: "",
+          jobDescription: "",
+          category: "",
+          maxPrice: "",
+          minPrice: "",
+        });
       });
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });

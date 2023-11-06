@@ -58,7 +58,7 @@ const JobSection = () => {
               </Tab>
               <Tab
                 className={"border  w-44 text-center p-2 rounded-lg"}
-                onClick={() => setCategory("graphic-design")}
+                onClick={() => setCategory("graphics-design")}
               >
                 Graphics Design
               </Tab>

@@ -7,7 +7,7 @@ import { authContext } from "../utils/context/AuthProvider";
 
 const JobDetails = () => {
   const { _id } = useParams();
-  console.log(_id);
+  // console.log(_id);
   const axios = useAxios();
   const { user } = useContext(authContext);
 
@@ -26,7 +26,7 @@ const JobDetails = () => {
       }
     },
   });
-  console.log(job);
+  // console.log(job);
   const {
     jobTitle,
     deadline,
@@ -47,7 +47,7 @@ const JobDetails = () => {
     isDeadlineExpired(deadline)
   );
 
-  console.log(isBiddingDisabled);
+  // console.log(isBiddingDisabled);
   return (
     <div>
       <div className="mt-24 bg-[#12CD6A] p-10">
@@ -132,7 +132,7 @@ const JobDetails = () => {
 
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
-          <ApplyJobForm />
+          <ApplyJobForm job={job} />
         </div>
       </dialog>
     </div>

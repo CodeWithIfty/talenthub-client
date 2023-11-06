@@ -1,4 +1,60 @@
-const ApplyJobForm = () => {
+import { useContext, useEffect, useState } from "react";
+import useAxios from "../utils/hooks/useAxios";
+import { authContext } from "../utils/context/AuthProvider";
+import toast from "react-hot-toast";
+
+const ApplyJobForm = ({ job }) => {
+  // console.log(job);
+  const axios = useAxios();
+  const { user } = useContext(authContext);
+  const { email, displayName, photoURL, emailVerified } = user;
+  const userInfo = { email, displayName, photoURL, emailVerified };
+
+  const { _id, jobTitle, clientInfo } = job || {};
+
+  const [formData, setFormData] = useState({
+    jobId: "",
+    userInfo: "",
+    clientInfo: "",
+    jobTitle: "",
+    deadline: "",
+    price: "",
+    status: "pending",
+  });
+
+  useEffect(() => {
+    if (job) {
+      setFormData({
+        jobId: _id,
+        userInfo: userInfo,
+        clientInfo: clientInfo,
+        jobTitle: jobTitle,
+        deadline: "",
+        price: "",
+        status: "pending",
+      });
+    }
+  }, [job]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const toastId = toast.loading("Logging in ...");
+    try {
+      axios.post("/bid", formData).then(() => {
+        toast.success("Job Posted", { id: toastId });
+      });
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+      console.log(err);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   return (
     <form method="dialog">
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -23,6 +79,8 @@ const ApplyJobForm = () => {
             name="price"
             id="price"
             className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+            value={formData.price}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -35,6 +93,8 @@ const ApplyJobForm = () => {
             name="deadline"
             id="deadline"
             className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+            value={formData.deadline}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -48,6 +108,7 @@ const ApplyJobForm = () => {
             id="userEmail"
             className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
             readOnly
+            value={formData.userInfo.email}
           />
         </div>
 
@@ -61,10 +122,12 @@ const ApplyJobForm = () => {
             id="clientEmail"
             className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
             readOnly
+            value={formData?.clientInfo?.email}
           />
         </div>
         <div className=" mt-4 flex items-center gap-10">
           <input
+            onClick={handleSubmit}
             type="submit"
             name=""
             id=""
