@@ -17,7 +17,7 @@ const SiteStatsSection = () => {
             </div>
           </div>
           <div className="xl:w-7/12 lg:w-8/12 w-10/12 mx-auto p-4 ">
-            <div className="mt-10 flex justify-between">
+            <div className="my-5 flex justify-between">
               <div className="w-44 text-center  border-r">
                 <h1 className="text-5xl font-bold text-white mb-1">15k</h1>
                 <p className="text-white">Job Offers</p>
