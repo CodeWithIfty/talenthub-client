@@ -6,13 +6,15 @@ import { useContext, useState } from "react";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { authContext } from "../utils/context/AuthProvider";
+// import SweetAlert2 from "react-sweetalert2";
+import Swal from "sweetalert2";
 
 const MyPostedJobs = () => {
   const { user } = useContext(authContext);
   const [category, setCategory] = useState("") || {};
   const axios = useAxios();
 
-  const { data: myJobs } = useQuery({
+  const { data: myJobs, refetch } = useQuery({
     queryKey: ["myjobs", category],
     queryFn: async () => {
       try {
@@ -26,6 +28,29 @@ const MyPostedJobs = () => {
     },
   });
 
+  const handleDelete = async (_id) => {
+    Swal.fire({
+      title: "Do you really want to delete this user?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`/job/${_id}`)
+          .then((res) => {
+            Swal.fire("Deleted!", "", "success");
+            console.log(res);
+            refetch();
+          })
+          .catch((error) => {
+            console.error("Error deleting user:", error);
+            Swal.fire("Error deleting user", "", "error");
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
   console.log(myJobs);
   return (
     <div className="container mx-auto mt-28 ">
@@ -64,7 +89,10 @@ const MyPostedJobs = () => {
               >
                 Graphics Design
               </Tab>
-              <Tab className={"border  w-20 text-center p-2 rounded-lg"} onClick={() => setCategory("")}>
+              <Tab
+                className={"border  w-20 text-center p-2 rounded-lg"}
+                onClick={() => setCategory("")}
+              >
                 All
               </Tab>
             </TabList>
@@ -72,8 +100,12 @@ const MyPostedJobs = () => {
 
           <div className="lg:p-20 md:p-10 p-2">
             <TabPanel className={" space-y-3"}>
-              {myJobs?.slice(0, 4).map((job) => (
-                <MyJobCard key={job._id} job={job} />
+              {myJobs?.map((job) => (
+                <MyJobCard
+                  key={job._id}
+                  job={job}
+                  handleDelete={handleDelete}
+                />
               ))}
               <div className="flex justify-center ">
                 <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
@@ -82,8 +114,12 @@ const MyPostedJobs = () => {
               </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {myJobs?.slice(0, 4).map((job) => (
-                <MyJobCard key={job._id} job={job} />
+              {myJobs?.map((job) => (
+                <MyJobCard
+                  key={job._id}
+                  job={job}
+                  handleDelete={handleDelete}
+                />
               ))}
               <div className="flex justify-center ">
                 <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
@@ -93,8 +129,12 @@ const MyPostedJobs = () => {
             </TabPanel>
 
             <TabPanel className={" space-y-3"}>
-              {myJobs?.slice(0, 4).map((job) => (
-                <MyJobCard key={job._id} job={job} />
+              {myJobs?.map((job) => (
+                <MyJobCard
+                  key={job._id}
+                  job={job}
+                  handleDelete={handleDelete}
+                />
               ))}
               <div className="flex justify-center ">
                 <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
@@ -103,8 +143,12 @@ const MyPostedJobs = () => {
               </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {myJobs?.slice(0, 4).map((job) => (
-                <MyJobCard key={job._id} job={job} />
+              {myJobs?.map((job) => (
+                <MyJobCard
+                  key={job._id}
+                  job={job}
+                  handleDelete={handleDelete}
+                />
               ))}
               <div className="flex justify-center ">
                 <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">

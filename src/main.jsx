@@ -17,6 +17,7 @@ import PrivateRoute from "./utils/PrivateRoute.jsx";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAxios from "./utils/hooks/useAxios.jsx";
+import UpdateJob from "./pages/UpdateJob.jsx";
 
 const axios = useAxios();
 
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <BidRequest />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-job/:_id",
+        element: (
+          <PrivateRoute>
+            <UpdateJob />
           </PrivateRoute>
         ),
       },

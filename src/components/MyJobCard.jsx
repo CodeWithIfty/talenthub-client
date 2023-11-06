@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 
-const MyJobCard = ({ job }) => {
-  const { _id, jobTitle, deadline, jobDescription, maxPrice, minPrice } = job;
+const MyJobCard = ({ job, handleDelete }) => {
+  console.log(job);
+
+  const { _id, jobTitle, deadline, jobDescription, maxPrice, minPrice } =
+    job || {};
   return (
     <div className="border p-8 rounded-md lg:w-10/12  mx-auto flex justify-between">
       <div className="w-7/12">
@@ -22,11 +25,17 @@ const MyJobCard = ({ job }) => {
         </div>
         <div className="">
           <Link
-            className="px-3 py-1 font-semibold bg-[#12CD6A] text-white rounded-full"
-            // to={`/job-details/${_id}`}
+            to={`/update-job/${_id}`}
+            className="px-3 py-1 mr-2 font-semibold bg-[#12CD6A] text-white rounded-full"
           >
             Update
           </Link>
+          <button
+            className="px-3 py-1 font-semibold bg-error text-white rounded-full"
+            onClick={() => handleDelete(_id)}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
