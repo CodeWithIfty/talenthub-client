@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import useAxios from "../utils/hooks/useAxios";
 import toast from "react-hot-toast";
@@ -14,7 +14,7 @@ const UpdateJob = () => {
     isLoading,
     isFetching,
   } = useQuery({
-    queryKey: ["updatejobs", _id],
+    queryKey: ["updatejobs"],
     queryFn: async () => {
       try {
         const res = await axios.get(`/job/${_id}`);
@@ -24,22 +24,34 @@ const UpdateJob = () => {
       }
     },
   });
-  // console.log(job);
-  const { jobTitle, deadline, jobDescription, maxPrice, minPrice, category } =
-    job || {};
 
+  // console.log(job);
   const { email, displayName, photoURL, emailVerified } = user;
   const userInfo = { email, displayName, photoURL, emailVerified };
 
   const [formData, setFormData] = useState({
     clientInfo: userInfo,
-    jobTitle: jobTitle,
-    deadline: deadline,
-    jobDescription: jobDescription,
-    category: category,
-    maxPrice: maxPrice,
-    minPrice: minPrice,
+    jobTitle: "",
+    deadline: "",
+    jobDescription: "",
+    category: "",
+    maxPrice: "",
+    minPrice: "",
   });
+
+  useEffect(() => {
+    if (!isLoading && !isFetching && job) {
+      setFormData({
+        ...userInfo,
+        jobTitle: job.jobTitle,
+        deadline: job.deadline,
+        jobDescription: job.jobDescription,
+        category: job.category,
+        maxPrice: job.maxPrice,
+        minPrice: job.minPrice,
+      });
+    }
+  }, [job]);
 
   const handleUpdateJob = async (e) => {
     e.preventDefault();
@@ -114,7 +126,6 @@ const UpdateJob = () => {
                 id="jobTitle"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
                 value={formData.jobTitle}
-                defaultValue={jobTitle}
                 onChange={handleInputChange}
                 required
               />
@@ -130,7 +141,6 @@ const UpdateJob = () => {
                 id="deadline"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
                 value={formData.deadline}
-                defaultValue={deadline}
                 onChange={handleInputChange}
                 required
               />
@@ -146,7 +156,6 @@ const UpdateJob = () => {
                 id="jobDesc"
                 name="jobDescription"
                 value={formData.jobDescription}
-                defaultValue={jobDescription}
                 onChange={handleInputChange}
                 required
               ></textarea>
@@ -161,7 +170,6 @@ const UpdateJob = () => {
                 id="category"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-non"
                 value={formData.category}
-                defaultValue={category}
                 onChange={handleInputChange}
                 required
               >
@@ -182,7 +190,6 @@ const UpdateJob = () => {
                 id="minPrice"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
                 value={formData.minPrice}
-                defaultValue={minPrice}
                 onChange={handleInputChange}
               />
             </div>
@@ -197,7 +204,6 @@ const UpdateJob = () => {
                 id="maxPrice"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
                 value={formData.maxPrice}
-                defaultValue={maxPrice}
                 onChange={handleInputChange}
               />
             </div>

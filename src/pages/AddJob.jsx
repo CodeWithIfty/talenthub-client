@@ -21,6 +21,14 @@ const AddJob = () => {
   // console.log(user.email);
   const handleAddJob = (e) => {
     e.preventDefault();
+
+    const selectedDate = new Date(formData.deadline);
+    const currentDate = new Date();
+    if (selectedDate < currentDate) {
+      toast.error("Please select a future date for the deadline.");
+      return;
+    }
+
     const toastId = toast.loading("Logging in ...");
     try {
       axios.post("/job", formData).then((res) => {

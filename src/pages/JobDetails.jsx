@@ -1,8 +1,8 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ApplyJobForm from "../components/ApplyJobForm";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 
 const JobDetails = () => {
@@ -36,6 +36,18 @@ const JobDetails = () => {
     clientInfo,
     category,
   } = job || {};
+
+  const isDeadlineExpired = (deadline) => {
+    const currentDate = new Date();
+    const jobDeadline = new Date(deadline);
+
+    return currentDate > jobDeadline;
+  };
+  const [isBiddingDisabled, setIsBiddingDisabled] = useState(
+    isDeadlineExpired(deadline)
+  );
+
+  console.log(isBiddingDisabled);
   return (
     <div>
       <div className="mt-24 bg-[#12CD6A] p-10">
@@ -100,6 +112,7 @@ const JobDetails = () => {
           ) : (
             <div className="p-10 flex flex-col justify-center items-center">
               <button
+                disabled={isBiddingDisabled}
                 onClick={() =>
                   document.getElementById("my_modal_3").showModal()
                 }
@@ -108,7 +121,9 @@ const JobDetails = () => {
                 PLACE YOUR BID
               </button>
               <p className="text-sm text-center mt-2 italic">
-                Click here to open bid form
+                {isBiddingDisabled
+                  ? "Bidding has expired"
+                  : "Click here to open bid form"}
               </p>
             </div>
           )}

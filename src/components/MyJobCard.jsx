@@ -9,7 +9,7 @@ const MyJobCard = ({ job, handleDelete }) => {
     <div className="border p-8 rounded-md lg:w-10/12  mx-auto flex justify-between">
       <div className="w-7/12">
         <h1 className="md:text-xl   font-bold">{jobTitle}</h1>
-        <p className="text-gray-500">{jobDescription.substring(0, 150)}...</p>
+        <p className="text-gray-500">{jobDescription?.substring(0, 150)}...</p>
       </div>
 
       <div className="flex gap-4 items-center">
