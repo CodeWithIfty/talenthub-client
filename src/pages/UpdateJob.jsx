@@ -24,7 +24,7 @@ const UpdateJob = () => {
       }
     },
   });
-  console.log(job);
+  // console.log(job);
   const { jobTitle, deadline, jobDescription, maxPrice, minPrice, category } =
     job || {};
 
@@ -41,9 +41,19 @@ const UpdateJob = () => {
     minPrice: minPrice,
   });
 
-  const handleAddJob = (e) => {
+  const handleUpdateJob = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const toastId = toast.loading("Logging in ...");
+    try {
+      axios.put(`/job/${_id}`, formData).then((res) => {
+        // console.log(res.data);
+        toast.success("Job Updated!", { id: toastId });
+      });
+    } catch (err) {
+      toast.error("Something went wrong!", { id: toastId });
+      console.log(err);
+    }
+    // console.log(formData);
   };
 
   const handleInputChange = (e) => {
@@ -61,7 +71,7 @@ const UpdateJob = () => {
         <form
           method="dialog"
           className="flex flex-col justify-center items-center"
-          onSubmit={handleAddJob}
+          onSubmit={handleUpdateJob}
         >
           <button
             type="button"

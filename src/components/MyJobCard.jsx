@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const MyJobCard = ({ job, handleDelete }) => {
-  console.log(job);
+  // console.log(job);
 
   const { _id, jobTitle, deadline, jobDescription, maxPrice, minPrice } =
     job || {};

@@ -39,7 +39,7 @@ const MyPostedJobs = () => {
           .delete(`/job/${_id}`)
           .then((res) => {
             Swal.fire("Deleted!", "", "success");
-            console.log(res);
+            // console.log(res);
             refetch();
           })
           .catch((error) => {
@@ -51,7 +51,7 @@ const MyPostedJobs = () => {
       }
     });
   };
-  console.log(myJobs);
+  // console.log(myJobs);
   return (
     <div className="container mx-auto mt-28 ">
       <div className="">

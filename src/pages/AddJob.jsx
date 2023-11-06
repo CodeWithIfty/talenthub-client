@@ -5,10 +5,10 @@ import toast from "react-hot-toast";
 const AddJob = () => {
   const axios = useAxios();
   const { user } = useContext(authContext);
-  console.log(user);
+  // console.log(user);
   const { email, displayName, photoURL, emailVerified } = user;
   const userInfo = { email, displayName, photoURL, emailVerified };
-  console.log(userInfo);
+  // console.log(userInfo);
   const [formData, setFormData] = useState({
     clientInfo: userInfo,
     jobTitle: "",
@@ -18,14 +18,14 @@ const AddJob = () => {
     maxPrice: "",
     minPrice: "",
   });
-  console.log(user.email);
+  // console.log(user.email);
   const handleAddJob = (e) => {
     e.preventDefault();
     const toastId = toast.loading("Logging in ...");
     try {
       axios.post("/job", formData).then((res) => {
         toast.success("Job Posted", { id: toastId });
-        console.log(res.data);
+        // console.log(res.data);
       });
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });
