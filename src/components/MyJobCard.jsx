@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const JobCard = ({ job }) => {
+const MyJobCard = ({ job }) => {
   const { _id, jobTitle, deadline, jobDescription, maxPrice, minPrice } = job;
   return (
     <div className="border p-8 rounded-md lg:w-10/12  mx-auto flex justify-between">
@@ -23,9 +23,9 @@ const JobCard = ({ job }) => {
         <div className="">
           <Link
             className="px-3 py-1 font-semibold bg-[#12CD6A] text-white rounded-full"
-            to={`/job-details/${_id}`}
+            // to={`/job-details/${_id}`}
           >
-            Bid Now
+            Update
           </Link>
         </div>
       </div>
@@ -33,4 +33,4 @@ const JobCard = ({ job }) => {
   );
 };
 
-export default JobCard;
+export default MyJobCard;

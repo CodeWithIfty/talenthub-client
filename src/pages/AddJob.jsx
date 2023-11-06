@@ -1,10 +1,52 @@
+import { useContext, useState } from "react";
+import { authContext } from "../utils/context/AuthProvider";
+import useAxios from "../utils/hooks/useAxios";
+import toast from "react-hot-toast";
 const AddJob = () => {
+  const axios = useAxios();
+  const { user } = useContext(authContext);
+  console.log(user);
+  const { email, displayName, photoURL, emailVerified } = user;
+  const userInfo = { email, displayName, photoURL, emailVerified };
+  console.log(userInfo);
+  const [formData, setFormData] = useState({
+    clientInfo: userInfo,
+    jobTitle: "",
+    deadline: "",
+    jobDescription: "",
+    category: "",
+    maxPrice: "",
+    minPrice: "",
+  });
+  console.log(user.email);
+  const handleAddJob = (e) => {
+    e.preventDefault();
+    const toastId = toast.loading("Logging in ...");
+    try {
+      axios.post("/job", formData).then((res) => {
+        toast.success("Job Posted", { id: toastId });
+        console.log(res.data);
+      });
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+      console.log(err);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   return (
     <div className="mt-24">
       <div className="container mx-auto">
         <form
           method="dialog"
           className="flex flex-col justify-center items-center"
+          onSubmit={handleAddJob}
         >
           <div className="p-4 ">
             <h1 className="text-3xl font-semibold text-center uppercase">
@@ -24,7 +66,10 @@ const AddJob = () => {
                 type="email"
                 name="userEmail"
                 id="userEmail"
+                value={user?.email}
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+                required
+                readOnly
               />
             </div>
 
@@ -37,6 +82,9 @@ const AddJob = () => {
                 name="jobTitle"
                 id="jobTitle"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+                value={formData.jobTitle}
+                onChange={handleInputChange}
+                required
               />
             </div>
 
@@ -49,6 +97,9 @@ const AddJob = () => {
                 name="deadline"
                 id="deadline"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+                value={formData.deadline}
+                onChange={handleInputChange}
+                required
               />
             </div>
 
@@ -60,34 +111,30 @@ const AddJob = () => {
                 className="textarea textarea-bordered"
                 placeholder="Bio"
                 id="jobDesc"
+                name="jobDescription"
+                value={formData.jobDescription}
+                onChange={handleInputChange}
+                required
               ></textarea>
             </div>
 
             <div className="flex flex-col">
               <label htmlFor="jobDesc" className="text-gray-600  text-lg">
-                Job Description:
+                Job Category:
               </label>
               <select
-                name=""
-                id=" "
+                name="category"
+                id="category"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-non"
+                value={formData.category}
+                onChange={handleInputChange}
+                required
               >
-                <option value="">Web Development</option>
-                <option value="">Digital Marketing</option>
-                <option value="">Graphics Design</option>
+                <option value="">Select Category</option>
+                <option value="web-development">Web Development</option>
+                <option value="digital-marketing">Digital Marketing</option>
+                <option value="graphics-design">Graphics Design</option>
               </select>
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="maxPrice" className="text-gray-600  text-lg">
-                Minimum price :
-              </label>
-              <input
-                type="number"
-                name="maxPrice"
-                id="maxPrice"
-                className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
-              />
             </div>
 
             <div className="flex flex-col">
@@ -99,6 +146,22 @@ const AddJob = () => {
                 name="minPrice"
                 id="minPrice"
                 className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+                value={formData.minPrice}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="maxPrice" className="text-gray-600  text-lg">
+                Maximum price :
+              </label>
+              <input
+                type="number"
+                name="maxPrice"
+                id="maxPrice"
+                className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
+                value={formData.maxPrice}
+                onChange={handleInputChange}
               />
             </div>
 

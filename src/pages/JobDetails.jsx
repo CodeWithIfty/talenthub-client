@@ -1,6 +1,31 @@
+import { useLoaderData, useParams } from "react-router-dom";
 import ApplyJobForm from "../components/ApplyJobForm";
+import useAxios from "../utils/hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const JobDetails = () => {
+  const { _id } = useParams();
+  console.log(_id);
+  const axios = useAxios();
+
+  const {
+    data: job,
+    isLoading,
+    isFetching,
+  } = useQuery({
+    queryKey: ["jobs", _id],
+    queryFn: async () => {
+      try {
+        const res = await axios.get(`/job/${_id}`);
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+  console.log(job);
+  const { jobTitle, deadline, description, maximumPrice, minimumPrice } =
+    job || {};
   return (
     <div>
       <div className="mt-24 bg-[#12CD6A] p-10">
@@ -32,7 +57,7 @@ const JobDetails = () => {
       <div className="container mx-auto flex ">
         <div className="w-10/12  p-10">
           <div className="">
-            <h1 className="text-5xl font-semibold mb-3">Google INC</h1>
+            <h1 className="text-5xl font-semibold mb-3">{jobTitle}</h1>
             <p className="w-10/12 ml-5">
               You will help Google build next-generation web applications like
               Gmail, Google Docs, Google Analytics, and the Google eBookstore
@@ -55,14 +80,17 @@ const JobDetails = () => {
             </ul>
           </div>
         </div>
-        <div className="w-2/12">
-          <div className="p-10 ">
+        <div className="w-2/12 bg-gray-600 bg-opacity-10 rounded-lg">
+          <div className="p-10 flex flex-col justify-center items-center">
             <button
               onClick={() => document.getElementById("my_modal_3").showModal()}
-              className="py-2 px-4 border-2 border-success rounded-full hover:bg-[#12CD6A] hover:shadow-xl font-semibold hover:text-white transition duration-200 ease-in-out"
+              className="py-2 px-4 border-2 border-success  rounded-full hover:bg-[#12CD6A] hover:shadow-xl font-semibold hover:text-white transition duration-200 ease-in-out"
             >
               PLACE YOUR BID
             </button>
+            <p className="text-sm text-center mt-2 italic">
+              Click here to open bid form
+            </p>
           </div>
         </div>
       </div>

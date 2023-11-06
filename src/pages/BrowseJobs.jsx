@@ -1,7 +1,25 @@
+import { useState } from "react";
 import JobCard from "../components/JobCard";
 import SearchBox from "../components/SearchBox";
+import useAxios from "../utils/hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const BrowseJobs = () => {
+  const [category, setCategory] = useState("") || {};
+  const axios = useAxios();
+
+  const { data: jobs } = useQuery({
+    queryKey: ["jobs", category],
+    queryFn: async () => {
+      try {
+        const res = await axios.get(`/jobs?category=${category}`);
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+  console.log(jobs);
   return (
     <div className="">
       <div className="bg-[url(/assets/images/bgimage.png)] mt-28 h-44 ">
@@ -21,10 +39,13 @@ const BrowseJobs = () => {
       <div className="container mx-auto mt-8 mb-8 pb-5 border-b">
         <h1 className="text-3xl">Recent Jobs</h1>
         <div className="mt-10 space-y-4">
+          {/* <JobCard />
           <JobCard />
           <JobCard />
-          <JobCard />
-          <JobCard />
+          <JobCard /> */}
+          {jobs?.map((job) => (
+            <JobCard key={job._id} job={job} />
+          ))}
         </div>
       </div>
     </div>

@@ -15,6 +15,10 @@ import BidRequest from "./pages/BidRequest.jsx";
 import AuthProvider from "./utils/context/AuthProvider.jsx";
 import PrivateRoute from "./utils/PrivateRoute.jsx";
 import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import useAxios from "./utils/hooks/useAxios.jsx";
+
+const axios = useAxios();
 
 const router = createBrowserRouter([
   {
@@ -35,7 +39,7 @@ const router = createBrowserRouter([
         element: <LogInRegistration />,
       },
       {
-        path: "/job-details",
+        path: "/job-details/:_id",
         element: (
           <PrivateRoute>
             <JobDetails />
@@ -79,10 +83,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
     <Toaster />
   </React.StrictMode>

@@ -89,11 +89,11 @@ const LoginForm = () => {
             />
             <button
               type="button"
-              className="py-3 px-4 border rounded-full font-semibold flex items-center gap-2 text-lg bg-white"
+              className="py-3 px-4 border rounded-full font-semibold flex items-center  text-lg bg-white"
               onClick={handleSignInWithGoogle}
             >
               <FcGoogle className="text-3xl" />
-              <span>SIGN IN WITH GOOGLE</span>
+              <span className="">SIGN IN WITH GOOGLE</span>
             </button>
           </div>
         </div>

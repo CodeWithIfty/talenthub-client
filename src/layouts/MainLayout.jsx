@@ -7,7 +7,6 @@ import { authContext } from "../utils/context/AuthProvider";
 const MainLayout = () => {
   const [isNavSticky, setIsNavSticky] = useState(false);
   const { user, SignOutUser, loading } = useContext(authContext);
-  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
