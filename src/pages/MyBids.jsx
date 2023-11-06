@@ -5,13 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "../utils/hooks/useAxios";
 import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
+import toast from "react-hot-toast";
 
 const MyBids = () => {
   const axios = useAxios();
   const [category, setCategory] = useState("") || {};
   const { user } = useContext(authContext);
 
-  const { data: myBids } = useQuery({
+  const { data: myBids, refetch } = useQuery({
     queryKey: ["myBids", user],
     queryFn: async () => {
       try {
@@ -24,7 +25,22 @@ const MyBids = () => {
   });
 
   console.log(myBids);
-
+  const handleComplete = async (_id, price) => {
+    const updatedStatus = { status: "complete" };
+    const toastId = toast.loading("Sending...");
+    try {
+      axios.put(`/bid/${_id}`, updatedStatus).then((res) => {
+        console.log(res.data);
+        toast.success(`Congratulations! You earned $${price}`, {
+          id: toastId,
+        });
+        refetch();
+      });
+    } catch (err) {
+      toast.error("Something went wrong!", { id: toastId });
+      console.log(err);
+    }
+  };
   return (
     <div className="container mx-auto mt-28 ">
       <div className="overflow-x-auto container mx-auto border my-5">
@@ -100,19 +116,41 @@ const MyBids = () => {
                         className={`${
                           status === "pending"
                             ? "bg-error text-white py-1 px-2  rounded-full font-semibold"
-                            : ""
+                            : status === "cancel"
+                            ? "bg-red-600 text-white capitalize py-1 px-2  rounded-full font-semibold"
+                            : "bg-success text-white py-1 px-2  rounded-full font-semibold"
                         }`}
                       >
                         {status}
                       </span>
                     </td>
                     <th>
-                      <button
-                        disabled
-                        className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
-                      >
-                        Mark as complete
-                      </button>
+                      {status === "pending" ? (
+                        <button
+                          disabled
+                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
+                        >
+                          Mark as complete
+                        </button>
+                      ) : status === "complete" ? (
+                        <button className="btn btn-ghost btn-xs bg-[#12CD6A] text-white">
+                          Earned ${price}
+                        </button>
+                      ) : status === "cancel" ? (
+                        <button
+                          disabled
+                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
+                        >
+                          Canceled
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
+                          onClick={() => handleComplete(_id, price)}
+                        >
+                          Mark as complete
+                        </button>
+                      )}
                     </th>
                   </tr>
                 )

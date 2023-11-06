@@ -37,13 +37,14 @@ const ApplyJobForm = ({ job }) => {
   }, [job]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const toastId = toast.loading("Logging in ...");
+    const toastId = toast.loading("Posting...");
     try {
-      axios.post("/bid", formData).then(() => {
+      axios.post("/bid", formData).then((res) => {
         toast.success("Job Posted", { id: toastId });
+        console.log(res);
       });
     } catch (err) {
-      toast.error("Something went wrong", { id: toastId });
+      toast.error(err, { id: toastId });
       console.log(err);
     }
   };
