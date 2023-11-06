@@ -1,8 +1,8 @@
 const TestomonialSection = () => {
   return (
     <div className="mt-10 ">
-      <div className="p-10 bg-[#12CD6A]">
-        <div className="flex items-center justify-between  mx-auto">
+      <div className=" bg-[url(/assets/images/bgimage.png)]">
+        <div className="flex p-10 items-center justify-between  mx-auto bg-gray-700 bg-opacity-60">
           <h1 className="lg:text-4xl text-2xl text-white font-bold">
             Start Building{" "}
             <span className="font-extralight">Your Own Job Board Now</span>
