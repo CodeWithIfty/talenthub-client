@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import ApplyJobForm from "../components/ApplyJobForm";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import { Helmet } from "react-helmet";
 
@@ -40,17 +40,24 @@ const JobDetails = () => {
     category,
   } = job || {};
 
-  const isDeadlineExpired = (deadline) => {
-    const currentDate = new Date();
-    const jobDeadline = new Date(deadline);
+  const [isBiddingDisabled, setIsBiddingDisabled] = useState(null);
 
-    return currentDate > jobDeadline;
-  };
-  const [isBiddingDisabled, setIsBiddingDisabled] = useState(
-    isDeadlineExpired(deadline)
-  );
+  useEffect(() => {
+    if (deadline) {
+      const currentDate = new Date();
+      const jobDeadline = new Date(deadline);
 
-  // console.log(isBiddingDisabled);
+      if (currentDate > jobDeadline) {
+        setIsBiddingDisabled(true);
+      } else {
+        setIsBiddingDisabled(false);
+      }
+    } else {
+      setIsBiddingDisabled(true);
+    }
+  }, [deadline, job]);
+
+  console.log(isBiddingDisabled);
   return (
     <div>
       <Helmet>

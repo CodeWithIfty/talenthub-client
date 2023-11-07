@@ -81,7 +81,7 @@ const ApplyJobForm = ({ job }) => {
           Web Designer at Google inc
         </p>
       </div>
-      
+
       <div className="flex  flex-col gap-2 p-10 ">
         <div className="mb-3">
           <label htmlFor="price" className="text-gray-600  text-lg">
