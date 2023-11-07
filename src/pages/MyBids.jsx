@@ -32,7 +32,7 @@ const MyBids = () => {
 
   useEffect(() => {
     if (sortStatus) {
-      const filteredBids = myBids.filter((bid) => bid.status === sortStatus);
+      const filteredBids = myBids?.filter((bid) => bid?.status === sortStatus);
       setFilteredData(filteredBids);
     } else {
       setFilteredData(myBids);
@@ -84,16 +84,16 @@ const MyBids = () => {
                   onChange={(e) => setSortStatus(e.target.value)}
                 >
                   <option value="">Sort by status</option>
-                  <option value="pending">Pending first</option>
-                  <option value="In Progress">In progress first</option>
-                  <option value="cancel">Cancel first</option>
-                  <option value="complete">Compelete first</option>
+                  <option value="pending">Sort by Pending</option>
+                  <option value="In Progress">Sort by In Progress</option>
+                  <option value="cancel">Sort by Cancel</option>
+                  <option value="complete">Sort by Complete</option>
                 </select>
               </th>
               <th></th>
             </tr>
           </thead>
-          {myBids?.length === 0 || filteredData.length === 0 ? (
+          {myBids?.length === 0 || filteredData?.length === 0 ? (
             <tbody className="text-center text-xl font-bold px-10">
               <tr>
                 <td colSpan="5">NO Data Available</td>

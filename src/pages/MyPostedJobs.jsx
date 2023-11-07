@@ -101,7 +101,7 @@ const MyPostedJobs = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      
+
       <div className="">
         <Tabs defaultIndex={3}>
           <div className="flex items-center justify-center flex-col lg:flex-row">
@@ -184,23 +184,29 @@ const MyPostedJobs = () => {
                 />
               ))}
             </TabPanel>
-            <div className="pagination-controls flex justify-center items-center gap-3 my-5">
-              <button
-                onClick={() => handlePageClick(page - 1)}
-                disabled={page === 1}
-                className="btn bg-[#12CD6A] text-white"
-              >
-                Previous Page
-              </button>
-              {renderPageNumbers()}
-              <button
-                onClick={() => handlePageClick(page + 1)}
-                disabled={page === totalPages}
-                className="btn bg-[#12CD6A] text-white"
-              >
-                Next Page
-              </button>
-            </div>
+            {myJobs?.result.length === 0 ? (
+              <span className="text-2xl font-semibold flex justify-center">
+                No Jobs Avaiable
+              </span>
+            ) : (
+              <div className="pagination-controls flex justify-center items-center gap-3 my-5">
+                <button
+                  onClick={() => handlePageClick(page - 1)}
+                  disabled={page === 1}
+                  className="btn bg-[#12CD6A] text-white"
+                >
+                  Previous Page
+                </button>
+                {renderPageNumbers()}
+                <button
+                  onClick={() => handlePageClick(page + 1)}
+                  disabled={page === totalPages}
+                  className="btn bg-[#12CD6A] text-white"
+                >
+                  Next Page
+                </button>
+              </div>
+            )}
           </div>
         </Tabs>
       </div>

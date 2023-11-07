@@ -8,6 +8,8 @@ import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import "react-step-progress-bar/styles.css";
+import { ProgressBar } from "react-step-progress-bar";
 
 const BidRequest = () => {
   const location = useLocation();
@@ -81,7 +83,7 @@ const BidRequest = () => {
               </th>
               <th>Client Info </th>
               <th>Job Details</th>
-              <th>Status</th>
+              <th className="text-center">Status</th>
               <th></th>
             </tr>
           </thead>
@@ -137,72 +139,71 @@ const BidRequest = () => {
                         Price: ${price} | DeadLine: {deadline}
                       </span>
                     </td>
-                    <td>
-                      <span
-                        className={`${
-                          status === "pending"
-                            ? "bg-error text-white py-1 capitalize px-2  rounded-full font-semibold"
-                            : status === "cancel"
-                            ? "bg-red-600 text-white capitalize py-1 px-2  rounded-full font-semibold"
-                            : "bg-[#12CD6A] text-white py-1 capitalize px-2  rounded-full font-semibold"
-                        }`}
+                    {status === "pending" ? (
+                      <th className="text-center">
+                        <span
+                          className={`bg-error text-white py-1 capitalize px-6  rounded-full font-bold `}
+                        >
+                          {status}
+                        </span>
+                      </th>
+                    ) : (
+                      <th
+                        className="flex justify-center items-center "
+                        colSpan="2"
                       >
-                        {status}
-                      </span>
-                    </td>
-                    <th className="flex gap-3 justify-around items-center ">
-                      {status === "pending" ? (
-                        <button
-                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
-                          onClick={() => handleAccept(_id)}
-                        >
-                          Accept
-                        </button>
-                      ) : status === "complete" ? (
-                        <button
-                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
-                          disabled
-                        >
-                          Accepted
-                        </button>
-                      ) : status === "cancel" ? (
-                        <button
-                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
-                          disabled
-                        >
-                          Canceled
-                        </button>
-                      ) : (
-                        <button
-                          className="btn btn-ghost btn-xs bg-[#12CD6A] text-white"
-                          // onClick={() => handleAccept(_id)}
-                        >
-                          Accepted
-                        </button>
-                      )}
+                        <ul className="steps scale-75 ">
+                          {status === "In Progress" ? (
+                            <>
+                              {" "}
+                              <li className="step step-primary mr-10">
+                                Pending
+                              </li>
+                              <li className="step  step-primary">
+                                In Progress
+                              </li>
+                              <li className="step step-success">Completed</li>
+                            </>
+                          ) : status === "complete" ? (
+                            <>
+                              {" "}
+                              <li className="step step-success mr-10">
+                                Pending
+                              </li>
+                              <li className="step  step-success">
+                                In Progress
+                              </li>
+                              <li className="step step-success">Completed</li>
+                            </>
+                          ) : (
+                            <span
+                              className={`bg-red-600  text-white py-1 capitalize px-16 text-base  rounded-full font-bold `}
+                            >
+                              {status}
+                            </span>
+                          )}
+                        </ul>
+                      </th>
+                    )}
 
-                      {status === "cancel" ? (
-                        <button
-                          className="btn btn-ghost btn-xs bg-error text-white"
-                          disabled
-                        >
-                          Canceled
-                        </button>
-                      ) : status === "complete" ? (
-                        <button
-                          className="btn btn-ghost btn-xs bg-error text-white"
-                          disabled
-                        >
-                          Cancel
-                        </button>
-                      ) : (
-                        <button
-                          className="btn btn-ghost btn-xs bg-error text-white"
-                          onClick={() => handleCancel(_id)}
-                        >
-                          Cancel
-                        </button>
-                      )}
+                    <th
+                      className={`${
+                        status === "pending" ? " block " : "hidden"
+                      } gap-3 justify-around items-center `}
+                    >
+                      <button
+                        className="btn btn-ghost btn-sm mt-1 mr-5 bg-[#12CD6A] text-white"
+                        onClick={() => handleAccept(_id)}
+                      >
+                        Accept
+                      </button>
+
+                      <button
+                        className="btn btn-ghost btn-sm mt-1 bg-error text-white"
+                        onClick={() => handleCancel(_id)}
+                      >
+                        Cancel
+                      </button>
                     </th>
                   </tr>
                 )
