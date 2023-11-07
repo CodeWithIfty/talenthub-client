@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { BiSolidUser } from "react-icons/bi";
 import { authContext } from "../utils/context/AuthProvider";
 import { Helmet } from "react-helmet";
+import AnimatedCursor from "react-animated-cursor";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -120,13 +121,15 @@ const MainLayout = () => {
                         <a className="font-bold">{user.displayName}</a>
                       </li>
                       <li>
-                        <a >Profile</a>
+                        <a>Profile</a>
                       </li>
                       <li>
                         <a>Settings</a>
                       </li>
                       <li>
-                        <button onClick={SignOutUser} className="text-error">Logout</button>
+                        <button onClick={SignOutUser} className="text-error">
+                          Logout
+                        </button>
                       </li>
                     </ul>
                   </div>
@@ -174,6 +177,28 @@ const MainLayout = () => {
           </ul>
         </div>
       </div>
+      <AnimatedCursor
+        showSystemCursor={true}
+        innerSize={25}
+        outerSize={50}
+        color="18, 205, 106"
+        outerAlpha={0.2}
+        innerScale={0.7}
+        outerScale={0.5}
+        clickables={[
+          "a",
+          'input[type="text"]',
+          'input[type="email"]',
+          'input[type="number"]',
+          'input[type="submit"]',
+          'input[type="image"]',
+          "label[for]",
+          "select",
+          "textarea",
+          "button",
+          ".link",
+        ]}
+      />
     </div>
   );
 };
