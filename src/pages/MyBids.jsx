@@ -9,11 +9,13 @@ import toast from "react-hot-toast";
 
 const MyBids = () => {
   const axios = useAxios();
-  const [category, setCategory] = useState("") || {};
+  // const [category, setCategory] = useState("") || {};
   const { user, SignOutUser } = useContext(authContext);
+  const [sortStatus, setSortStatus] = useState();
+  console.log(sortStatus);
 
   const { data: myBids, refetch } = useQuery({
-    queryKey: ["myBids", user],
+    queryKey: ["myBids", user.email],
     queryFn: async () => {
       try {
         const res = await axios.get(`/bids?userEmail=${user.email}`);
@@ -59,7 +61,20 @@ const MyBids = () => {
               </th>
               <th>Client Info </th>
               <th>Job Details</th>
-              <th>Status</th>
+              <th>
+                <select
+                  name=""
+                  id=""
+                  className="bg-transparent"
+                  onChange={(e) => setSortStatus(e.target.value)}
+                >
+                  <option value="">Sort by status</option>
+                  <option value="pending">Pending first</option>
+                  <option value="In Progress">In progress first</option>
+                  <option value="cancel">Cancel first</option>
+                  <option value="complete">Compelete first</option>
+                </select>
+              </th>
               <th></th>
             </tr>
           </thead>
