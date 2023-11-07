@@ -17,16 +17,16 @@ const SiteStatsSection = () => {
             </div>
           </div>
           <div className="xl:w-7/12 lg:w-8/12 w-10/12 mx-auto p-4 ">
-            <div className="my-5 flex justify-between">
-              <div className="w-44 text-center  border-r">
+            <div className="my-5 flex flex-col md:flex-row  items-center md:items-start justify-between">
+              <div className="w-44 text-center  md:border-r">
                 <h1 className="text-5xl font-bold text-white mb-1">15k</h1>
                 <p className="text-white">Job Offers</p>
               </div>
-              <div className="w-44 text-center border-r">
+              <div className="w-44 text-center md:border-r">
                 <h1 className="text-5xl font-bold text-white mb-1">4982</h1>
                 <p className="text-white">Members</p>
               </div>
-              <div className="w-44 text-center border-r">
+              <div className="w-44 text-center md:border-r">
                 <h1 className="text-5xl font-bold text-white mb-1">768</h1>
                 <p className="text-white">Resume Posted</p>
               </div>
@@ -37,7 +37,7 @@ const SiteStatsSection = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[url(/assets/images/blusectionimage.png)] bg-cover w-5/12 h-full lg:block hidden"></div>
+        <div className="bg-[url(/assets/images/blusectionimage.png)] bg-cover w-5/12 lg:block hidden"></div>
       </div>
     </div>
   );

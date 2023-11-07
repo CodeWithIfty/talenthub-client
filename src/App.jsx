@@ -5,12 +5,12 @@ import TestomonialSection from "./components/TestomonialSection";
 
 function App() {
   return (
-    <>
+    <div >
       <Banner />
       <JobSection />
       <SiteStatsSection />
-      <TestomonialSection />
-    </>
+      <TestomonialSection /> 
+    </div>
   );
 }
 

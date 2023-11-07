@@ -2,7 +2,7 @@ import { BsDribbble, BsFacebook, BsGithub, BsTwitter } from "react-icons/bs";
 const Footer = () => {
   return (
     <>
-      <footer className="relative bg-blueGray-200 pt-8 pb-6">
+      <footer className=" bg-blueGray-200 pt-8 pb-6 w-full">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-left lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
@@ -12,30 +12,30 @@ const Footer = () => {
               <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
                 Join us & Explore thousands of jobs
               </h5>
-              <div className="mt-6 lg:mb-0 mb-6">
+              <div className="mt-6 lg:mb-0 mb-6 z-10  ">
                 <button
-                  className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center  rounded-full outline-none focus:outline-none mr-2"
+                  className="bg-white  text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center  rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <BsTwitter className="w-full scale-110" />
+                  <BsTwitter className="w-full scale-110 " />
                 </button>
                 <button
                   className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <BsFacebook className="w-full scale-110" />
+                  <BsFacebook className="w-full scale-110 " />
                 </button>
                 <button
                   className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <BsDribbble className="w-full scale-110" />
+                  <BsDribbble className="w-full scale-110 " />
                 </button>
                 <button
                   className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <BsGithub className="w-full scale-110" />
+                  <BsGithub className="w-full scale-110 " />
                 </button>
               </div>
             </div>

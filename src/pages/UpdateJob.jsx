@@ -84,7 +84,7 @@ const UpdateJob = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      ;
+
       {isFetching || isLoading ? (
         <span className="loading loading-ring loading-md scale-150"></span>
       ) : (

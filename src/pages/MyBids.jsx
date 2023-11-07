@@ -53,13 +53,13 @@ const MyBids = () => {
   };
 
   return (
-    <div className="container mx-auto mt-28 ">
+    <div className=" mt-28 ">
       <Helmet>
         <title>{pageTitle}</title>
         <link rel="icon" href={`/path-to-your-favicon.ico`} />
       </Helmet>
-      <div className="overflow-x-auto container mx-auto border my-5">
-        <table className="table">
+      <div className="overflow-scroll max-w-fit mx-auto  border my-5 ">
+        <table className="table ">
           {/* head */}
           <thead>
             <tr className="text-base">

@@ -46,7 +46,7 @@ const ApplyJobForm = ({ job }) => {
       toast.error("Please select a future date for the deadline.");
       return;
     }
-    
+
     const toastId = toast.loading("Posting...");
     try {
       axios.post("/bid", formData).then((res) => {
@@ -73,7 +73,7 @@ const ApplyJobForm = ({ job }) => {
         ✕
       </button>
 
-      <div className="p-4 ">
+      <div className="p-4">
         <h1 className="text-3xl font-semibold text-center">
           Place Your Bid Here
         </h1>
@@ -81,7 +81,8 @@ const ApplyJobForm = ({ job }) => {
           Web Designer at Google inc
         </p>
       </div>
-      <div className="flex flex-col gap-2 p-10 ">
+      
+      <div className="flex  flex-col gap-2 p-10 ">
         <div className="mb-3">
           <label htmlFor="price" className="text-gray-600  text-lg">
             Price:

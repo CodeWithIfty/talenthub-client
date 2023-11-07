@@ -57,14 +57,14 @@ const JobDetails = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      ;
+
       <div className="mt-24 bg-[#12CD6A] p-10">
         <div className="container mx-auto">
           <h1 className="text-4xl text-white">Job Details </h1>
         </div>
       </div>
       <div className="border-b-2">
-        <div className="w-7/12 mx-auto flex p-5 justify-between">
+        <div className="lg:w-7/12 mx-auto flex flex-col md:flex-row p-5 justify-between">
           <div className="flex items-center gap-2">
             <div className=" ">
               <img
@@ -98,14 +98,14 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto flex ">
-        <div className="w-10/12  p-10">
+      <div className="container mx-auto flex lg:flex-row flex-col">
+        <div className="lg:w-10/12  p-10">
           <div className="">
             <h1 className="text-5xl font-semibold mb-3">{jobTitle}</h1>
             <p className="w-10/12 ml-5">{jobDescription}</p>
           </div>
         </div>
-        <div className="w-2/12 bg-gray-600 bg-opacity-10 rounded-lg">
+        <div className="lg:w-2/12 bg-gray-600 bg-opacity-10 rounded-lg">
           {user.email === clientInfo?.email ? (
             <div className="p-10 flex flex-col justify-center items-center">
               <input

@@ -68,9 +68,9 @@ const BidRequest = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      ;
-      <div className="overflow-x-auto container mx-auto border my-5">
-        <table className="table">
+
+      <div className="overflow-x-scroll   mx-auto border my-5">
+        <table className="table ">
           {/* head */}
           <thead>
             <tr className="text-base">
@@ -144,7 +144,7 @@ const BidRequest = () => {
                             ? "bg-error text-white py-1 capitalize px-2  rounded-full font-semibold"
                             : status === "cancel"
                             ? "bg-red-600 text-white capitalize py-1 px-2  rounded-full font-semibold"
-                            : "bg-error text-white py-1 capitalize px-2  rounded-full font-semibold"
+                            : "bg-[#12CD6A] text-white py-1 capitalize px-2  rounded-full font-semibold"
                         }`}
                       >
                         {status}

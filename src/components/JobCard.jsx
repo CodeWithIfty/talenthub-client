@@ -9,7 +9,7 @@ const JobCard = ({ job }) => {
         <p className="text-gray-500">{jobDescription?.substring(0, 150)}...</p>
       </div>
 
-      <div className="flex gap-4 items-center">
+      <div className="flex flex-col md:flex-row gap-4 items-center">
         <div className="">
           <h1 className="font-bold  text-gray-700">
             ${minPrice}-${maxPrice} an hour

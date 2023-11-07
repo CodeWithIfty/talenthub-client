@@ -29,7 +29,7 @@ const MainLayout = () => {
 
   const navbarClass = isNavSticky
     ? "navbar sticky  top-0 bg-white  transition duration-100 ease-in-out z-50 shadow"
-    : "navbar  absolute transition p-6 top-0 ";
+    : "navbar md:absolute  transition p-6 top-0 ";
 
   return (
     <div>
@@ -37,7 +37,6 @@ const MainLayout = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      ;
       <div className="drawer">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle dur" />
         <div className="drawer-content flex flex-col">
@@ -143,6 +142,9 @@ const MainLayout = () => {
           </div>
           {/* Page content here */}
           <Outlet></Outlet>
+          <div className="w-full">
+            <Footer />
+          </div>
         </div>
 
         <div className="drawer-side h-full">
@@ -170,9 +172,6 @@ const MainLayout = () => {
             </li>
           </ul>
         </div>
-      </div>
-      <div className="">
-        <Footer />
       </div>
     </div>
   );

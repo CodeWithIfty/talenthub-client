@@ -101,7 +101,7 @@ const MyPostedJobs = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      ;
+      
       <div className="">
         <Tabs defaultIndex={3}>
           <div className="flex items-center justify-center flex-col lg:flex-row">

@@ -67,7 +67,7 @@ const AddJob = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      ;
+
       <div className="container mx-auto">
         <form
           method="dialog"
