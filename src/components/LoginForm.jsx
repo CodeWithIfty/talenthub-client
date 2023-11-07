@@ -90,7 +90,7 @@ const LoginForm = () => {
             />
           </div>
           {loginError && (
-            <p className="text-xs text-error mt-2">{loginError}</p>
+            <p className="text-xs text-error mt-2 ml-52">{loginError}</p>
           )}
           <div className="ml-32 mt-4 flex items-center gap-10">
             <input

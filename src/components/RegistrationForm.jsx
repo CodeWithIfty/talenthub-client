@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAxios from "../utils/hooks/useAxios";
 
 const RegistrationForm = () => {
   const { createUser, SignInWithGoogle, updateUserProfile } =
@@ -17,6 +18,7 @@ const RegistrationForm = () => {
   const [photoUrl, setPhotoUrl] = useState("");
   const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
+  const axios = useAxios();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -37,9 +39,16 @@ const RegistrationForm = () => {
     console.log(name, email, password);
     createUser(email, password)
       .then((res) => {
-        updateUserProfile(name, photoUrl);
-        toast.success("Successfully Registered !", { id: toastId });
         // navigate("/");
+        const userEmail = res.user.email;
+        if (userEmail) {
+          axios.post("/auth/access-token", { userEmail }).then((res) => {
+            updateUserProfile(name, photoUrl);
+            toast.success("Successfully Registered !", { id: toastId });
+            navigate(location?.state ? location.state : "/");
+            console.log(res);
+          });
+        }
         console.log(res);
       })
       .catch((error) => {
@@ -50,10 +59,17 @@ const RegistrationForm = () => {
       });
   };
   const handleSignInWithGoogle = () => {
+    const toastId = toast.loading("Logging in ...");
     SignInWithGoogle()
       .then((res) => {
-        navigate(location?.state ? location.state : "/");
-        console.log(res);
+        const userEmail = res.user.email;
+        if (userEmail) {
+          axios.post("/auth/access-token", { userEmail }).then((res) => {
+            toast.success("Logged in", { id: toastId });
+            navigate(location?.state ? location.state : "/");
+            console.log(res);
+          });
+        }
       })
       .catch((err) => console.log(err));
   };

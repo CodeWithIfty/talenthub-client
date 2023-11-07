@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import useAxios from "../utils/hooks/useAxios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const AddJob = () => {
   const axios = useAxios();
   const { user } = useContext(authContext);
+  const navigate = useNavigate();
   // console.log(user);
   const { email, displayName, photoURL, emailVerified } = user;
   const userInfo = { email, displayName, photoURL, emailVerified };
@@ -41,6 +43,7 @@ const AddJob = () => {
           maxPrice: "",
           minPrice: "",
         });
+        navigate("/my-posted-jobs");
       });
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });

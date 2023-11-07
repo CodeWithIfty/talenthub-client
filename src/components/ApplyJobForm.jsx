@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import useAxios from "../utils/hooks/useAxios";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ApplyJobForm = ({ job }) => {
   // console.log(job);
   const axios = useAxios();
+  const navigate = useNavigate();
   const { user } = useContext(authContext);
   const { email, displayName, photoURL, emailVerified } = user;
   const userInfo = { email, displayName, photoURL, emailVerified };
@@ -41,6 +43,7 @@ const ApplyJobForm = ({ job }) => {
     try {
       axios.post("/bid", formData).then((res) => {
         toast.success("Job Posted", { id: toastId });
+        navigate("/my-bids");
         console.log(res);
       });
     } catch (err) {

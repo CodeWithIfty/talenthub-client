@@ -16,7 +16,7 @@ const JobSection = () => {
     queryKey: ["jobs", category],
     queryFn: async () => {
       try {
-        const res = await axios.get(`/jobs?category=${category}`);
+        const res = await axios.get(`/jobs?category=${category}&pageSize=4`);
         return res.data;
       } catch (error) {
         console.log(error);
