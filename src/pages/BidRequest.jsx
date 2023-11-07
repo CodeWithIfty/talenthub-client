@@ -69,7 +69,7 @@ const BidRequest = () => {
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
 
-      <div className="overflow-x-scroll   mx-auto border my-5">
+      <div className="overflow-x-auto   mx-auto border my-5">
         <table className="table ">
           {/* head */}
           <thead>

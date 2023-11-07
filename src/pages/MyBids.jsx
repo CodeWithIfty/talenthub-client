@@ -1,22 +1,19 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../utils/hooks/useAxios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
-import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const MyBids = () => {
-  const location = useLocation();
   const pageTitle = `Talenthub | My Bids`;
   const axios = useAxios();
-  // const [category, setCategory] = useState("") || {};
   const { user, SignOutUser } = useContext(authContext);
   const [sortStatus, setSortStatus] = useState();
   console.log(sortStatus);
+  const [filteredData, setFilteredData] = useState([]);
 
   const { data: myBids, refetch } = useQuery({
     queryKey: ["myBids", user.email],
@@ -32,6 +29,15 @@ const MyBids = () => {
       }
     },
   });
+
+  useEffect(() => {
+    if (sortStatus) {
+      const filteredBids = myBids.filter((bid) => bid.status === sortStatus);
+      setFilteredData(filteredBids);
+    } else {
+      setFilteredData(myBids);
+    }
+  }, [sortStatus, myBids]);
 
   console.log(myBids);
   const handleComplete = async (_id, price) => {
@@ -58,7 +64,7 @@ const MyBids = () => {
         <title>{pageTitle}</title>
         <link rel="icon" href={`/path-to-your-favicon.ico`} />
       </Helmet>
-      <div className="overflow-scroll max-w-fit mx-auto  border my-5 ">
+      <div className="overflow-x-auto max-w-fit mx-auto  border my-5 ">
         <table className="table ">
           {/* head */}
           <thead>
@@ -87,7 +93,7 @@ const MyBids = () => {
               <th></th>
             </tr>
           </thead>
-          {myBids?.length === 0 ? (
+          {myBids?.length === 0 || filteredData.length === 0 ? (
             <tbody className="text-center text-xl font-bold px-10">
               <tr>
                 <td colSpan="5">NO Data Available</td>
@@ -96,17 +102,8 @@ const MyBids = () => {
           ) : (
             <tbody>
               {/* row 1 */}
-              {myBids?.map(
-                ({
-                  _id,
-                  jobTitle,
-                  deadline,
-                  status,
-                  price,
-                  jobId,
-                  userInfo,
-                  clientInfo,
-                }) => (
+              {filteredData?.map(
+                ({ _id, jobTitle, deadline, status, price, clientInfo }) => (
                   <tr key={_id}>
                     <th>
                       <label>
