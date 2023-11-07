@@ -23,7 +23,7 @@ const JobSection = () => {
       }
     },
   });
-  // console.log(jobs);
+  console.log(jobs);
 
   return (
     <div className="container mx-auto mt-10">
@@ -73,7 +73,7 @@ const JobSection = () => {
 
           <div className="lg:p-20 md:p-10 p-2">
             <TabPanel className={" space-y-3"}>
-              {jobs?.slice(0, 4).map((job) => (
+              {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
 
@@ -87,7 +87,7 @@ const JobSection = () => {
               </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {jobs?.slice(0, 4).map((job) => (
+              {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
 
@@ -101,7 +101,7 @@ const JobSection = () => {
               </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {jobs?.slice(0, 4).map((job) => (
+              {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
 
@@ -115,7 +115,7 @@ const JobSection = () => {
               </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {jobs?.slice(0, 4).map((job) => (
+              {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
 

@@ -26,7 +26,6 @@ const BrowseJobs = () => {
   });
 
   useEffect(() => {
-    // Calculate the total number of pages based on job count and page size
     if (jobs) {
       setTotalPages(Math.ceil(jobs.totalCount / pageSize));
     }

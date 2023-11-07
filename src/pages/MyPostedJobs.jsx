@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import MyJobCard from "../components/MyJobCard";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { authContext } from "../utils/context/AuthProvider";
@@ -13,13 +13,16 @@ const MyPostedJobs = () => {
   const { user, SignOutUser } = useContext(authContext);
   const [category, setCategory] = useState("") || {};
   const axios = useAxios();
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
+  const [totalPages, setTotalPages] = useState(1);
 
   const { data: myJobs, refetch } = useQuery({
-    queryKey: ["myjobs", category],
+    queryKey: ["myjobs", category, page, pageSize],
     queryFn: async () => {
       try {
         const res = await axios.get(
-          `/jobs?category=${category}&email=${user.email}`
+          `/jobs?category=${category}&email=${user.email}&page=${page}&pageSize=${pageSize}`
         );
         return res.data;
       } catch (error) {
@@ -31,6 +34,39 @@ const MyPostedJobs = () => {
     },
   });
 
+  useEffect(() => {
+    if (myJobs) {
+      setTotalPages(Math.ceil(myJobs.totalCount / pageSize));
+    }
+  }, [myJobs]);
+
+  const handlePageClick = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setPage(pageNumber);
+    }
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    return (
+      <div className="page-numbers ">
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageClick(pageNumber)}
+            className={
+              page === pageNumber ? "active btn bg-[#12CD6A]" : "btn btn-ghost"
+            }
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
+    );
+  };
+
+  console.log(myJobs);
   const handleDelete = async (_id) => {
     Swal.fire({
       title: "Do you really want to delete this user?",
@@ -103,62 +139,59 @@ const MyPostedJobs = () => {
 
           <div className="lg:p-20 md:p-10 p-2">
             <TabPanel className={" space-y-3"}>
-              {myJobs?.map((job) => (
+              {myJobs?.result.map((job) => (
                 <MyJobCard
                   key={job._id}
                   job={job}
                   handleDelete={handleDelete}
                 />
               ))}
-              <div className="flex justify-center ">
-                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
-                  See More
-                </button>
-              </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {myJobs?.map((job) => (
+              {myJobs?.result.map((job) => (
                 <MyJobCard
                   key={job._id}
                   job={job}
                   handleDelete={handleDelete}
                 />
               ))}
-              <div className="flex justify-center ">
-                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
-                  See More
-                </button>
-              </div>
             </TabPanel>
 
             <TabPanel className={" space-y-3"}>
-              {myJobs?.map((job) => (
+              {myJobs?.result.map((job) => (
                 <MyJobCard
                   key={job._id}
                   job={job}
                   handleDelete={handleDelete}
                 />
               ))}
-              <div className="flex justify-center ">
-                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
-                  See More
-                </button>
-              </div>
             </TabPanel>
             <TabPanel className={" space-y-3"}>
-              {myJobs?.map((job) => (
+              {myJobs?.result.map((job) => (
                 <MyJobCard
                   key={job._id}
                   job={job}
                   handleDelete={handleDelete}
                 />
               ))}
-              <div className="flex justify-center ">
-                <button className="bg-[#12CD6A] px-4 py-2  text-white font-semibold border-2 transition ease-in-out duration-150 mt-4 hover:bg-transparent hover:border-2 hover:text-gray-600 rounded-full">
-                  See More
-                </button>
-              </div>
             </TabPanel>
+            <div className="pagination-controls flex justify-center items-center gap-3 my-5">
+              <button
+                onClick={() => handlePageClick(page - 1)}
+                disabled={page === 1}
+                className="btn bg-[#12CD6A] text-white"
+              >
+                Previous Page
+              </button>
+              {renderPageNumbers()}
+              <button
+                onClick={() => handlePageClick(page + 1)}
+                disabled={page === totalPages}
+                className="btn bg-[#12CD6A] text-white"
+              >
+                Next Page
+              </button>
+            </div>
           </div>
         </Tabs>
       </div>
