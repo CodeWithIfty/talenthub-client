@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ApplyJobForm from "../components/ApplyJobForm";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -7,8 +7,6 @@ import { authContext } from "../utils/context/AuthProvider";
 import { Helmet } from "react-helmet";
 
 const JobDetails = () => {
-  const location = useLocation();
-  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
   const { _id } = useParams();
   // console.log(_id);
   const axios = useAxios();
@@ -40,6 +38,8 @@ const JobDetails = () => {
     category,
   } = job || {};
 
+  const pageTitle = `TH | ${jobTitle ? jobTitle : "loading..."}`;
+
   const [isBiddingDisabled, setIsBiddingDisabled] = useState(null);
 
   useEffect(() => {
@@ -62,7 +62,6 @@ const JobDetails = () => {
     <div>
       <Helmet>
         <title>{pageTitle}</title>
-        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
 
       <div className="mt-24 bg-[#12CD6A] p-10">

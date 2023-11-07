@@ -6,14 +6,11 @@ import { useContext, useEffect, useState } from "react";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { authContext } from "../utils/context/AuthProvider";
-// import SweetAlert2 from "react-sweetalert2";
 import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const MyPostedJobs = () => {
-  const location = useLocation();
-  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
+  const pageTitle = `TH | My Posted Jobs`;
   const { user, SignOutUser } = useContext(authContext);
   const [category, setCategory] = useState("") || {};
   const axios = useAxios();
@@ -99,7 +96,6 @@ const MyPostedJobs = () => {
     <div className="container mx-auto mt-28 ">
       <Helmet>
         <title>{pageTitle}</title>
-        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
 
       <div className="">

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
 
 const MyBids = () => {
-  const pageTitle = `Talenthub | My Bids`;
+  const pageTitle = `TH | My Bids`;
   const axios = useAxios();
   const { user, SignOutUser } = useContext(authContext);
   const [sortStatus, setSortStatus] = useState();
@@ -101,7 +101,6 @@ const MyBids = () => {
             </tbody>
           ) : (
             <tbody>
-              {/* row 1 */}
               {filteredData?.map(
                 ({ _id, jobTitle, deadline, status, price, clientInfo }) => (
                   <tr key={_id}>

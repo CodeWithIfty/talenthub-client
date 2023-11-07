@@ -6,12 +6,11 @@ import { Helmet } from "react-helmet";
 
 const LogInRegistration = () => {
   const location = useLocation();
-  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
+  const pageTitle = `TH | ${location.pathname.replace("/", "")}`;
   return (
     <div className="">
       <Helmet>
         <title>{pageTitle}</title>
-        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
 
       <div className="bg-[#12CD6A]  mt-28 ">

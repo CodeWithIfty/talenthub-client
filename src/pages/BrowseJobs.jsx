@@ -3,12 +3,10 @@ import JobCard from "../components/JobCard";
 import SearchBox from "../components/SearchBox";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const BrowseJobs = () => {
-  const location = useLocation();
-  const pageTitle = `Talenthub | Browse Jobs`;
+  const pageTitle = `TH | Browse Jobs`;
   const [category, setCategory] = useState("");
   const axios = useAxios();
   const [page, setPage] = useState(1);
@@ -48,7 +46,6 @@ const BrowseJobs = () => {
       <div className="page-numbers ">
         <Helmet>
           <title>{pageTitle}</title>
-          {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
         </Helmet>
         
         {pageNumbers.map((pageNumber) => (

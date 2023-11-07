@@ -1,21 +1,17 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../index.css";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../utils/hooks/useAxios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
-import { useLocation } from "react-router-dom";
+
 import { Helmet } from "react-helmet";
 import "react-step-progress-bar/styles.css";
-import { ProgressBar } from "react-step-progress-bar";
 
 const BidRequest = () => {
-  const location = useLocation();
-  const pageTitle = `Talenthub | Bid Request`;
+  const pageTitle = `TH | Bid Request`;
   const axios = useAxios();
-  const [category, setCategory] = useState("") || {};
   const { user, SignOutUser } = useContext(authContext);
 
   const { data: myBids, refetch } = useQuery({
@@ -68,7 +64,6 @@ const BidRequest = () => {
     <div className="container mx-auto mt-28 ">
       <Helmet>
         <title>{pageTitle}</title>
-        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
 
       <div className="overflow-x-auto   mx-auto border my-5">
@@ -103,9 +98,8 @@ const BidRequest = () => {
                   deadline,
                   status,
                   price,
-                  jobId,
+
                   userInfo,
-                  clientInfo,
                 }) => (
                   <tr key={_id}>
                     <th>

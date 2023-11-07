@@ -7,7 +7,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 const UpdateJob = () => {
   const location = useLocation();
-  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
   const { _id } = useParams();
   const axios = useAxios();
   const { user } = useContext(authContext);
@@ -41,7 +40,7 @@ const UpdateJob = () => {
     maxPrice: "",
     minPrice: "",
   });
-
+  const pageTitle = `TH | Update | ${formData.jobTitle}`;
   useEffect(() => {
     if (!isLoading && !isFetching && job) {
       setFormData({

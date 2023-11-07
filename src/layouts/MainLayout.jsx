@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 
 const MainLayout = () => {
   const location = useLocation();
-  const pageTitle = `Talenthub | Home`;
+  const pageTitle = `TH | Home`;
   const [isNavSticky, setIsNavSticky] = useState(false);
   const { user, SignOutUser, loading } = useContext(authContext);
 
