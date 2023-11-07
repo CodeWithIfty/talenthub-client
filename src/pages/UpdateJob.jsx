@@ -85,12 +85,6 @@ const UpdateJob = () => {
           className="flex flex-col justify-center items-center"
           onSubmit={handleUpdateJob}
         >
-          <button
-            type="button"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </button>
           <div className="p-4 ">
             <h1 className="text-3xl font-semibold text-center uppercase">
               UPADTE job from here
