@@ -6,8 +6,12 @@ import useAxios from "../utils/hooks/useAxios";
 import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const BidRequest = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | Bid Request`;
   const axios = useAxios();
   const [category, setCategory] = useState("") || {};
   const { user, SignOutUser } = useContext(authContext);
@@ -60,6 +64,11 @@ const BidRequest = () => {
   };
   return (
     <div className="container mx-auto mt-28 ">
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       <div className="overflow-x-auto container mx-auto border my-5">
         <table className="table">
           {/* head */}

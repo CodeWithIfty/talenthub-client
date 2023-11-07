@@ -1,8 +1,16 @@
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Link, useLocation } from "react-router-dom";
 
 const ErrorPage = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | 404 not found`;
   return (
     <div className="">
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       {/* <!-- component -->
 <!-- This is an example component --> */}
       <div className="h-screen w-screen bg-gray-50 flex items-center">

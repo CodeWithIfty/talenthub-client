@@ -3,8 +3,11 @@ import { authContext } from "../utils/context/AuthProvider";
 import useAxios from "../utils/hooks/useAxios";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const UpdateJob = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
   const { _id } = useParams();
   const axios = useAxios();
   const { user } = useContext(authContext);
@@ -77,6 +80,11 @@ const UpdateJob = () => {
   };
   return (
     <div className="mt-28">
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       {isFetching || isLoading ? (
         <span className="loading loading-ring loading-md scale-150"></span>
       ) : (

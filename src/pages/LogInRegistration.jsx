@@ -1,10 +1,19 @@
+import { useLocation } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import RegistrationForm from "../components/RegistrationForm";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Helmet } from "react-helmet";
 
 const LogInRegistration = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
   return (
     <div className="">
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       <div className="bg-[#12CD6A]  mt-28 ">
         <Tabs className={"container mx-auto p-10"} defaultIndex={1}>
           <TabList className={"border-none"}>

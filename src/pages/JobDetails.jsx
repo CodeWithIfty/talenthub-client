@@ -1,11 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ApplyJobForm from "../components/ApplyJobForm";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const JobDetails = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | ${location.pathname.replace("/", "")}`;
   const { _id } = useParams();
   // console.log(_id);
   const axios = useAxios();
@@ -50,12 +53,16 @@ const JobDetails = () => {
   // console.log(isBiddingDisabled);
   return (
     <div>
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       <div className="mt-24 bg-[#12CD6A] p-10">
         <div className="container mx-auto">
           <h1 className="text-4xl text-white">Job Details </h1>
         </div>
       </div>
-
       <div className="border-b-2">
         <div className="w-7/12 mx-auto flex p-5 justify-between">
           <div className="flex items-center gap-2">
@@ -91,7 +98,6 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-
       <div className="container mx-auto flex ">
         <div className="w-10/12  p-10">
           <div className="">
@@ -129,7 +135,6 @@ const JobDetails = () => {
           )}
         </div>
       </div>
-
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <ApplyJobForm job={job} />

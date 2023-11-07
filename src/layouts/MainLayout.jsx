@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import { BiSolidUser } from "react-icons/bi";
 import { authContext } from "../utils/context/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const MainLayout = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | Home`;
   const [isNavSticky, setIsNavSticky] = useState(false);
   const { user, SignOutUser, loading } = useContext(authContext);
 
@@ -30,6 +33,11 @@ const MainLayout = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       <div className="drawer">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle dur" />
         <div className="drawer-content flex flex-col">

@@ -2,8 +2,11 @@ import { useContext, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import useAxios from "../utils/hooks/useAxios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 const AddJob = () => {
+  const location = useLocation();
+  const pageTitle = `Talenthub | Add Job`;
   const axios = useAxios();
   const { user } = useContext(authContext);
   const navigate = useNavigate();
@@ -60,6 +63,11 @@ const AddJob = () => {
   };
   return (
     <div className="mt-24">
+      <Helmet>
+        <title>{pageTitle}</title>
+        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
+      </Helmet>
+      ;
       <div className="container mx-auto">
         <form
           method="dialog"
