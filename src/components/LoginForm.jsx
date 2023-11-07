@@ -60,13 +60,13 @@ const LoginForm = () => {
       });
   };
   return (
-    <div className="flex w-full justify-around">
+    <div className="flex flex-col md:flex-row  w-full md:justify-around justify-center items-center">
       <form onSubmit={handleLoginSubmit}>
         <h1 className="text-white px-10 mt-10 text-xl">
           Login here with your required information
         </h1>
-        <div className="flex flex-col gap-2 p-10 ">
-          <div className="flex  items-center justify-between">
+        <div className="flex flex-col gap-2 md:p-10 p-4 ">
+          <div className="flex  flex-col md:flex-row items-center justify-between">
             <label htmlFor="email" className="text-white  ">
               Email:{" "}
             </label>
@@ -78,7 +78,7 @@ const LoginForm = () => {
             />
           </div>
 
-          <div className="flex  items-center justify-between">
+          <div className="flex flex-col md:flex-row   items-center justify-between">
             <label htmlFor="password" className="text-white  ">
               Password:{" "}
             </label>
@@ -92,7 +92,7 @@ const LoginForm = () => {
           {loginError && (
             <p className="text-xs text-error mt-2 ml-52">{loginError}</p>
           )}
-          <div className="ml-32 mt-4 flex items-center gap-10">
+          <div className="md:ml-32 mt-4 flex flex-col md:flex-row items-center md:gap-10 gap-3">
             <input
               type="submit"
               name=""

@@ -13,11 +13,11 @@ const LogInRegistration = () => {
         <title>{pageTitle}</title>
         {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
-      
+
       <div className="bg-[#12CD6A]  mt-28 ">
-        <Tabs className={"container mx-auto p-10"} defaultIndex={1}>
+        <Tabs className={"container mx-auto md:p-10 "} defaultIndex={1}>
           <TabList className={"border-none"}>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-col md:flex-row items-center gap-5">
               <Tab
                 className={
                   " text-5xl uppercase font-bold cursor-pointer border-r-2 px-4 py-2"

@@ -74,13 +74,13 @@ const RegistrationForm = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="flex w-full justify-around">
+    <div className="flex flex-col gap-10 md:gap-0 items-center md:flex-row w-full justify-around">
       <form onSubmit={handleFormSubmit}>
         <h1 className="text-white px-10 mt-10 text-xl">
           Register here with your required information
         </h1>
-        <div className="flex flex-col gap-2 p-10 ">
-          <div className="flex  items-center justify-between">
+        <div className="flex flex-col gap-2 md:p-10 ">
+          <div className="flex flex-col  md:flex-row items-center justify-between">
             <label htmlFor="name" className="text-white  ">
               Full Name:{" "}
             </label>
@@ -95,7 +95,7 @@ const RegistrationForm = () => {
             />
           </div>
 
-          <div className="flex  items-center justify-between">
+          <div className="flex flex-col  md:flex-row  items-center justify-between">
             <label htmlFor="email" className="text-white  ">
               Email:{" "}
             </label>
@@ -113,7 +113,7 @@ const RegistrationForm = () => {
             <p className="text-xs text-error mt-2 text-center">{emailError}</p>
           )}
 
-          <div className="flex  items-center justify-between">
+          <div className="flex flex-col  md:flex-row  items-center justify-between">
             <label htmlFor="password" className="text-white  ">
               Password:{" "}
             </label>
@@ -130,7 +130,7 @@ const RegistrationForm = () => {
           {passwordError && (
             <p className="text-xs text-error mt-2 ">{passwordError}</p>
           )}
-          <div className="flex  items-center justify-between">
+          <div className="flex flex-col  md:flex-row  items-center justify-between">
             <label htmlFor="photourl" className="text-white  ">
               Photo URL:{" "}
             </label>
@@ -145,7 +145,7 @@ const RegistrationForm = () => {
             />
           </div>
 
-          <div className="ml-32 mt-4 flex items-center gap-10">
+          <div className="md:ml-32 mt-4 flex flex-col  md:flex-row items-center gap-10">
             <input
               type="submit"
               name=""
