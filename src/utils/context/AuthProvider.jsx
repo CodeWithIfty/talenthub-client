@@ -44,15 +44,19 @@ const AuthProvider = ({ children }) => {
       photoURL: photoUrl,
     });
   };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currenUser) => {
       setUser(currenUser);
-      setLoading(false);
+      // Use setTimeout to set loading to false after 2 seconds
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     });
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [user]);
 
   // console.log(user);
 

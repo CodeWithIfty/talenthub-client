@@ -23,7 +23,6 @@ const JobSection = () => {
       }
     },
   });
-  console.log(jobs);
 
   return (
     <div className="container mx-auto mt-10">

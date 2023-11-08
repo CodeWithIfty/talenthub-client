@@ -1,4 +1,4 @@
-# Full-Stack Web Marketplace
+# MERN-Stack Web Marketplace (Talenthub)
 
 ### Live Link : https://talenthub-c77ac.web.app/
 
