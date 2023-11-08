@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaBriefcase, FaLocationArrow, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const SearchBox = ({ category, keyword, location }) => {
   const navigate = useNavigate();
@@ -83,3 +84,8 @@ const SearchBox = ({ category, keyword, location }) => {
 };
 
 export default SearchBox;
+SearchBox.propTypes = {
+  category: PropTypes.string,
+  keyword: PropTypes.string,
+  location: PropTypes.string,
+};

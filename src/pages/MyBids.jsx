@@ -46,7 +46,7 @@ const MyBids = () => {
     const updatedStatus = { status: "complete" };
     const toastId = toast.loading("Sending...");
     try {
-      axios.put(`/bid/${_id}`, updatedStatus).then((res) => {
+      axios.put(`/bid/${_id}`, updatedStatus).then(() => {
         // console.log(res.data);
         toast.success(`Congratulations! You earned $${price}`, {
           id: toastId,

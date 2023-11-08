@@ -79,7 +79,7 @@ const MyPostedJobs = () => {
       if (result.isConfirmed) {
         axios
           .delete(`/job/${_id}`)
-          .then((res) => {
+          .then(() => {
             Swal.fire("Deleted!", "", "success");
             // console.log(res);
             refetch();

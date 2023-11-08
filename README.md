@@ -16,7 +16,7 @@ Welcome to our MERN Web Marketplace application! This app is designed to help us
 
 5. **Deadline Validation**: We've implemented a deadline system to ensure that jobs are only open for bidding until the specified deadline. The application validates deadlines to prevent bids on closed job listings, maintaining transparency and fairness.
 
-6. **Browse Job**: In the homepage user will see 4 jobs but if he/she clicked on see more button user can see all the recent job with the "Pagination" feature.
+6. **Browse Job**: In the homepage user will see 4 jobs but if he/she clicked on see more button user can see all the recent job with the "Pagination" feature and also user can search by category from search bar text search is not implemented right now but will update it soon.
 
 7. **JWT Authentication**: I have implement jwt authentication on the private routes when user logged in then will generate a jwt token on the cookie user if the token is expired or invalid user will logged out.
 
