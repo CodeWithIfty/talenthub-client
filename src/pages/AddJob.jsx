@@ -4,6 +4,9 @@ import useAxios from "../utils/hooks/useAxios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const AddJob = () => {
   const pageTitle = `TH | Add Job`;
   const axios = useAxios();
@@ -60,12 +63,20 @@ const AddJob = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    AOS.init({});
+  }, []);
   return (
-    <div className="mt-24">
+    <div
+      className="mt-24"
+      data-aos="fade-down"
+      data-aos-easing="linear"
+      data-aos-duration="300"
+    >
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
-
       <div className="container mx-auto">
         <form
           method="dialog"

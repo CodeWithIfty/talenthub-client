@@ -8,6 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import { authContext } from "../utils/context/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const MyPostedJobs = () => {
   const pageTitle = `TH | My Posted Jobs`;
@@ -50,6 +52,9 @@ const MyPostedJobs = () => {
   const renderPageNumbers = () => {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    useEffect(() => {
+      AOS.init({});
+    }, []);
     return (
       <div className="page-numbers ">
         {pageNumbers.map((pageNumber) => (
@@ -142,7 +147,12 @@ const MyPostedJobs = () => {
             </TabList>
           </div>
 
-          <div className="lg:p-20 md:p-10 p-2">
+          <div
+            className="lg:p-20 md:p-10 p-2 "
+            data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="300"
+          >
             <TabPanel className={" space-y-3"}>
               {myJobs?.result.map((job) => (
                 <MyJobCard

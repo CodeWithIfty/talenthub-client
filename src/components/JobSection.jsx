@@ -7,6 +7,9 @@ import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const JobSection = () => {
   const [category, setCategory] = useState("") || {};
@@ -23,7 +26,9 @@ const JobSection = () => {
       }
     },
   });
-
+  useEffect(() => {
+    AOS.init({});
+  }, []);
   return (
     <div className="container mx-auto mt-10">
       <div className="">
@@ -70,8 +75,13 @@ const JobSection = () => {
             </TabList>
           </div>
 
-          <div className="lg:p-20 md:p-10 p-2">
-            <TabPanel className={" space-y-3"}>
+          <div
+            className="lg:p-20 md:p-10 p-2"
+            data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="500"
+          >
+            <TabPanel className={" space-y-3"} >
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -85,7 +95,7 @@ const JobSection = () => {
                 </Link>
               </div>
             </TabPanel>
-            <TabPanel className={" space-y-3"}>
+            <TabPanel className={" space-y-3"} >
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -99,7 +109,7 @@ const JobSection = () => {
                 </Link>
               </div>
             </TabPanel>
-            <TabPanel className={" space-y-3"}>
+            <TabPanel className={" space-y-3"} >
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -113,7 +123,7 @@ const JobSection = () => {
                 </Link>
               </div>
             </TabPanel>
-            <TabPanel className={" space-y-3"}>
+            <TabPanel className={" space-y-3"} >
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}

@@ -1,4 +1,10 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const TestomonialSection = () => {
+  useEffect(() => {
+    AOS.init({});
+  }, []);
   return (
     <div className="mt-10 ">
       <div className=" bg-[url(/assets/images/bgimage.png)]">
@@ -48,7 +54,12 @@ const TestomonialSection = () => {
                 </svg>
               </a>
             </div>
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div
+              className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3"
+              data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="500"
+            >
               <blockquote className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8">
                 <div>
                   <div className="flex gap-0.5 text-green-500">

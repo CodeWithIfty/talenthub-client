@@ -6,7 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
-import Loader from "../components/Loader";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const MyBids = () => {
   const pageTitle = `TH | My Bids`;
@@ -59,13 +60,21 @@ const MyBids = () => {
     }
   };
 
+  useEffect(() => {
+    AOS.init({});
+  }, []);
   return (
     <div className=" mt-28 ">
       <Helmet>
         <title>{pageTitle}</title>
         <link rel="icon" href={`/path-to-your-favicon.ico`} />
       </Helmet>
-      <div className="overflow-x-auto max-w-fit mx-auto  border my-5 ">
+      <div
+        className="overflow-x-auto max-w-fit mx-auto  border my-5 "
+        data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="300"
+      >
         <table className="table ">
           {/* head */}
           <thead>

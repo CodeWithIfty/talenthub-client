@@ -5,9 +5,12 @@ import useAxios from "../utils/hooks/useAxios";
 import { useContext } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import { Helmet } from "react-helmet";
 import "react-step-progress-bar/styles.css";
+import { useEffect } from "react";
 
 const BidRequest = () => {
   const pageTitle = `TH | Bid Request`;
@@ -60,13 +63,22 @@ const BidRequest = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    AOS.init({});
+  }, []);
   return (
     <div className="container mx-auto mt-28 ">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
 
-      <div className="overflow-x-auto   mx-auto border my-5">
+      <div
+        className="overflow-x-auto   mx-auto border my-5"
+        data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="300"
+      >
         <table className="table ">
           {/* head */}
           <thead>
@@ -150,18 +162,18 @@ const BidRequest = () => {
                           {status === "In Progress" ? (
                             <>
                               {" "}
-                              <li className="step step-primary mr-10">
+                              <li className="step step-primary mr-9">
                                 Pending
                               </li>
                               <li className="step  step-primary">
                                 In Progress
                               </li>
-                              <li className="step step-success">Completed</li>
+                              <li className="step ">Completed</li>
                             </>
                           ) : status === "complete" ? (
                             <>
                               {" "}
-                              <li className="step step-success mr-10">
+                              <li className="step step-success mr-9">
                                 Pending
                               </li>
                               <li className="step  step-success">

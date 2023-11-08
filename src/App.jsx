@@ -6,9 +6,10 @@ import TestomonialSection from "./components/TestomonialSection";
 import "./index.css";
 
 function App() {
+
   return (
     <div>
-      <Banner />
+      <Banner data-aos="fade-right" />
       <JobSection />
       <SiteStatsSection />
       <TestomonialSection />
