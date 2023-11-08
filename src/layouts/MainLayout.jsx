@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import { BiSolidUser } from "react-icons/bi";
 import { authContext } from "../utils/context/AuthProvider";
@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 import AnimatedCursor from "react-animated-cursor";
 
 const MainLayout = () => {
-  const location = useLocation();
   const pageTitle = `TH | Home`;
   const [isNavSticky, setIsNavSticky] = useState(false);
   const { user, SignOutUser, loading } = useContext(authContext);
@@ -36,7 +35,6 @@ const MainLayout = () => {
     <div>
       <Helmet>
         <title>{pageTitle}</title>
-        {/* <link rel="icon" href={`/path-to-your-favicon.ico`} /> */}
       </Helmet>
       <div className="drawer">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle dur" />

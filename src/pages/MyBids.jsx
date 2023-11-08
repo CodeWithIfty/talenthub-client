@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../utils/context/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import Loader from "../components/Loader";
 
 const MyBids = () => {
   const pageTitle = `TH | My Bids`;
