@@ -32,14 +32,14 @@ const BidRequest = () => {
     },
   });
 
-  console.log(myBids);
+
 
   const handleAccept = async (_id) => {
     const updatedStatus = { status: "In Progress" };
     const toastId = toast.loading("Accepting...");
     try {
       axios.put(`/bid/${_id}`, updatedStatus).then((res) => {
-        console.log(res.data);
+
         toast.success("Job Accepted!", { id: toastId });
         refetch();
       });
@@ -54,7 +54,6 @@ const BidRequest = () => {
     const toastId = toast.loading("Cancelling...");
     try {
       axios.put(`/bid/${_id}`, updatedStatus).then((res) => {
-        console.log(res.data);
         toast.success("Job Canceled!", { id: toastId });
         refetch();
       });

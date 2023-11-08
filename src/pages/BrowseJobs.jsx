@@ -4,10 +4,16 @@ import SearchBox from "../components/SearchBox";
 import useAxios from "../utils/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
+import { useLocation } from "react-router-dom";
 
 const BrowseJobs = () => {
+  const currentLocation = useLocation();
+  const category = currentLocation?.state?.category || "";
+  const keyword = currentLocation?.state?.keyword;
+  const location = currentLocation?.state?.location;
+
+  // console.log(category);
   const pageTitle = `TH | Browse Jobs`;
-  const [category, setCategory] = useState("");
   const axios = useAxios();
   const [page, setPage] = useState(1);
   const pageSize = 5;
@@ -47,7 +53,7 @@ const BrowseJobs = () => {
         <Helmet>
           <title>{pageTitle}</title>
         </Helmet>
-        
+
         {pageNumbers.map((pageNumber) => (
           <button
             key={pageNumber}
@@ -69,14 +75,16 @@ const BrowseJobs = () => {
         <div className="w-full h-full bg-gray-800 p-10 bg-opacity-50 flex justify-between items-center">
           <h1 className="text-4xl font-semibold text-white">Browse Jobs</h1>
           <div className="text-white">
-            <p>Total jobs : 59</p>
-            <p>Last Posted Time</p>
+            <p>Total jobs : {jobs?.totalCount}</p>
+            <p>
+              Category: <br /> {category}
+            </p>
           </div>
         </div>
       </div>
 
       <div className="mt-10">
-        <SearchBox />
+        <SearchBox category={category} keyword={keyword} location={location} />
       </div>
 
       <div className="container mx-auto mt-8 mb-8 pb-5 border-b">

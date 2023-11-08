@@ -14,7 +14,7 @@ const MyBids = () => {
   const axios = useAxios();
   const { user, SignOutUser } = useContext(authContext);
   const [sortStatus, setSortStatus] = useState();
-  console.log(sortStatus);
+  // console.log(sortStatus);
   const [filteredData, setFilteredData] = useState([]);
 
   const { data: myBids, refetch } = useQuery({
@@ -41,13 +41,13 @@ const MyBids = () => {
     }
   }, [sortStatus, myBids]);
 
-  console.log(myBids);
+  // console.log(myBids);
   const handleComplete = async (_id, price) => {
     const updatedStatus = { status: "complete" };
     const toastId = toast.loading("Sending...");
     try {
       axios.put(`/bid/${_id}`, updatedStatus).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         toast.success(`Congratulations! You earned $${price}`, {
           id: toastId,
         });

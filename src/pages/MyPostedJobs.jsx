@@ -69,7 +69,7 @@ const MyPostedJobs = () => {
     );
   };
 
-  console.log(myJobs);
+
   const handleDelete = async (_id) => {
     Swal.fire({
       title: "Do you really want to delete this user?",
