@@ -49,11 +49,15 @@ const ApplyJobForm = ({ job }) => {
 
     const toastId = toast.loading("Posting...");
     try {
-      axios.post("/bid", formData).then((res) => {
-        toast.success("Job Posted", { id: toastId });
-        navigate("/my-bids");
-        console.log(res);
-      });
+      if (formData.price === "" || formData.deadline === "") {
+        toast.error("Fill up the form correctly", { id: toastId });
+      } else {
+        axios.post("/bid", formData).then((res) => {
+          toast.success("Job Posted", { id: toastId });
+          navigate("/my-bids");
+          console.log(res);
+        });
+      }
     } catch (err) {
       toast.error(err, { id: toastId });
       console.log(err);
@@ -94,6 +98,7 @@ const ApplyJobForm = ({ job }) => {
             className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
             value={formData.price}
             onChange={handleInputChange}
+            required
           />
         </div>
 
@@ -108,6 +113,7 @@ const ApplyJobForm = ({ job }) => {
             className="w-96 p-3  rounded-lg bg-gray-50 border border-gray-400 outline-none"
             value={formData.deadline}
             onChange={handleInputChange}
+            required
           />
         </div>
 
