@@ -9,8 +9,13 @@ import toast from "react-hot-toast";
 import useAxios from "../utils/hooks/useAxios";
 
 const RegistrationForm = () => {
-  const { createUser, SignInWithGoogle, updateUserProfile } =
-    useContext(authContext);
+  const {
+    createUser,
+    SignInWithGoogle,
+    updateUserProfile,
+    setLoading,
+    loading,
+  } = useContext(authContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,6 +57,7 @@ const RegistrationForm = () => {
         console.log(res);
       })
       .catch((error) => {
+        setLoading(false);
         if (error.message.match(/email-already-in-use/g))
           setEmailError("This email already in use");
         toast.error("This email already in use", { id: toastId });
