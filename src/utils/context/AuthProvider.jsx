@@ -52,12 +52,11 @@ const AuthProvider = ({ children }) => {
       const userEmail = currenUser?.email || user?.email;
       console.log(userEmail);
       if (currenUser) {
-        await axios.post("/auth/access-token", { userEmail })
-        .then((res) => {
+        await axios.post("/auth/access-token", { userEmail }).then((res) => {
           console.log(res);
         });
       } else {
-        axios
+        await axios
           .post("/logout", { userEmail })
           .then((response) => {
             console.log(response);
