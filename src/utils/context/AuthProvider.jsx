@@ -60,6 +60,8 @@ const AuthProvider = ({ children }) => {
           .post("/logout", { userEmail })
           .then((response) => {
             console.log(response);
+            SignOutUser();
+            console.log("working here");
           })
           .catch((error) => console.log(error));
       }
