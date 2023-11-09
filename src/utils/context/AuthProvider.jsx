@@ -47,12 +47,13 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currenUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currenUser) => {
       // Use setTimeout to set loading to false after 2 seconds
       const userEmail = currenUser?.email || user?.email;
       console.log(userEmail);
       if (currenUser) {
-        axios.post("/auth/access-token", { userEmail }).then((res) => {
+        await axios.post("/auth/access-token", { userEmail })
+        .then((res) => {
           console.log(res);
         });
       } else {
