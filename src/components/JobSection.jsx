@@ -81,7 +81,7 @@ const JobSection = () => {
             data-aos-easing="linear"
             data-aos-duration="500"
           >
-            <TabPanel className={" space-y-3"} >
+            <TabPanel className={" space-y-3"}>
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -95,7 +95,7 @@ const JobSection = () => {
                 </Link>
               </div>
             </TabPanel>
-            <TabPanel className={" space-y-3"} >
+            <TabPanel className={" space-y-3"}>
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -109,7 +109,7 @@ const JobSection = () => {
                 </Link>
               </div>
             </TabPanel>
-            <TabPanel className={" space-y-3"} >
+            <TabPanel className={" space-y-3"}>
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -123,7 +123,7 @@ const JobSection = () => {
                 </Link>
               </div>
             </TabPanel>
-            <TabPanel className={" space-y-3"} >
+            <TabPanel className={" space-y-3"}>
               {jobs?.result.slice(0, 4).map((job) => (
                 <JobCard key={job._id} job={job} />
               ))}

@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import app from "../firebase.config";
 import PropTypes from "prop-types";
+import useAxios from "../hooks/useAxios";
 
 export const authContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -19,6 +20,7 @@ const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+  const axios = useAxios();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,11 +48,25 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currenUser) => {
-      setUser(currenUser);
       // Use setTimeout to set loading to false after 2 seconds
+      const userEmail = currenUser?.email || user?.email;
+      console.log(userEmail);
+      if (currenUser) {
+        axios.post("/auth/access-token", { userEmail }).then((res) => {
+          console.log(res);
+        });
+      } else {
+        axios
+          .post("/logout", { userEmail })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => console.log(error));
+      }
       setTimeout(() => {
         setLoading(false);
       }, 1000);
+      setUser(currenUser);
     });
     return () => {
       unSubscribe();

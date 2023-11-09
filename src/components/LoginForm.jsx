@@ -25,14 +25,8 @@ const LoginForm = () => {
 
     SignInUser(email, password)
       .then((res) => {
-        const userEmail = res.user.email;
-        if (userEmail) {
-          axios.post("/auth/access-token", { userEmail }).then((res) => {
-            toast.success("Logged in", { id: toastId });
-            navigate(location?.state ? location.state : "/");
-            console.log(res);
-          });
-        }
+        toast.success("Logged in", { id: toastId });
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
         setLoading(false);
@@ -44,15 +38,9 @@ const LoginForm = () => {
   const handleSignInWithGoogle = () => {
     const toastId = toast.loading("Logging in ...");
     SignInWithGoogle()
-      .then((res) => {
-        const userEmail = res.user.email;
-        if (userEmail) {
-          axios.post("/auth/access-token", { userEmail }).then((res) => {
-            toast.success("Logged in", { id: toastId });
-            navigate(location?.state ? location.state : "/");
-            console.log(res);
-          });
-        }
+      .then(() => {
+        toast.success("Logged in", { id: toastId });
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         toast.error("Invalid Login Details", { id: toastId });

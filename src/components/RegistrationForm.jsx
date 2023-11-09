@@ -44,16 +44,10 @@ const RegistrationForm = () => {
     console.log(name, email, password);
     createUser(email, password)
       .then((res) => {
+        updateUserProfile(name, photoUrl);
+        toast.success("Successfully Registered !", { id: toastId });
+        navigate(location?.state ? location.state : "/");
         // navigate("/");
-        const userEmail = res.user.email;
-        if (userEmail) {
-          axios.post("/auth/access-token", { userEmail }).then((res) => {
-            updateUserProfile(name, photoUrl);
-            toast.success("Successfully Registered !", { id: toastId });
-            navigate(location?.state ? location.state : "/");
-            console.log(res);
-          });
-        }
         console.log(res);
       })
       .catch((error) => {
@@ -68,14 +62,8 @@ const RegistrationForm = () => {
     const toastId = toast.loading("Logging in ...");
     SignInWithGoogle()
       .then((res) => {
-        const userEmail = res.user.email;
-        if (userEmail) {
-          axios.post("/auth/access-token", { userEmail }).then((res) => {
-            toast.success("Logged in", { id: toastId });
-            navigate(location?.state ? location.state : "/");
-            console.log(res);
-          });
-        }
+        toast.success("Logged in", { id: toastId });
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => console.log(err));
   };
